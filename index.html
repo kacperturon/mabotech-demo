@@ -538,7 +538,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
   <div class="eng-label" style="bottom:20px; left:20px;">REF: DIN_69893_HSK</div>
   
   <!-- COMPLEX DIAGRAM -->
-  <div style="position:absolute; right:8%; top:15%; width:450px; height:450px; opacity:0.1; pointer-events:none; z-index:0;">
+  <div style="position:absolute; right:8%; top:15%; width:450px; height:450px; opacity:0.25; pointer-events:none; z-index:0;">
     <svg viewBox="0 0 200 200" fill="none" stroke="var(--theme-secondary)" stroke-width="0.4">
       <circle cx="100" cy="100" r="80" stroke-dasharray="2 1" />
       <circle cx="100" cy="100" r="45" />
@@ -564,7 +564,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
   <div class="hero-bg"></div>
   <div class="hero-content">
     <!-- TECHNICAL DRAWING OVERLAY -->
-    <div style="position:absolute; right:-10%; top:-20px; width:500px; height:400px; opacity:0.12; pointer-events:none; z-index:0;">
+    <div id="heroDiagram" style="position:absolute; right:-10%; top:-20px; width:500px; height:400px; opacity:0.3; pointer-events:none; z-index:0; transition: transform 0.1s ease-out;">
       <svg viewBox="0 0 250 180" fill="none" stroke="var(--theme-secondary)" stroke-width="0.3">
         <!-- Main Body Cross-Section -->
         <path d="M20 60 L80 60 L85 45 L110 45 L110 55 L115 55 L115 105 L110 105 L110 115 L85 115 L80 100 L20 100 Z" />
@@ -673,7 +673,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
   <div class="dim-line dim-v" style="left:20px; top:100px; bottom:100px;"></div>
   
   <!-- SIDE VIEW DIAGRAM -->
-  <div style="position:absolute; left:-50px; bottom:10%; width:300px; height:200px; opacity:0.1; pointer-events:none; z-index:0;">
+  <div style="position:absolute; left:-50px; bottom:10%; width:300px; height:200px; opacity:0.25; pointer-events:none; z-index:0;">
     <svg viewBox="0 0 150 100" fill="none" stroke="var(--theme-secondary)" stroke-width="0.3">
       <rect x="20" y="20" width="110" height="60" />
       <path d="M20 30h110M20 70h110" />
@@ -796,7 +796,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
   <div class="dim-line dim-h" style="top:20px; left:20%; right:20%;"></div>
   
   <!-- DETAIL VIEW DIAGRAM -->
-  <div style="position:absolute; right:20px; top:40px; width:200px; height:200px; opacity:0.08; pointer-events:none; z-index:0;">
+  <div style="position:absolute; right:20px; top:40px; width:200px; height:200px; opacity:0.2; pointer-events:none; z-index:0;">
     <svg viewBox="0 0 100 100" fill="none" stroke="var(--theme-secondary)" stroke-width="0.3">
       <circle cx="50" cy="50" r="40" />
       <path d="M50 10 L50 90 M10 50 L90 50" stroke-dasharray="1 1" />
@@ -1089,6 +1089,19 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
 
   // close drawer on ESC
   document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeMenu(); });
+
+  // Scroll animation for hero diagram
+  const heroDiagram = document.getElementById('heroDiagram');
+  if (heroDiagram) {
+    window.addEventListener('scroll', function() {
+      const scrollY = window.scrollY;
+      const rotate = scrollY * 0.05;
+      const translateX = scrollY * 0.2;
+      const translateY = scrollY * -0.1;
+      const scale = 1 + (scrollY * 0.0002);
+      heroDiagram.style.transform = `translate(${translateX}px, ${translateY}px) rotate(${rotate}deg) scale(${scale})`;
+    });
+  }
 })();
 </script>
 </body>
