@@ -108,7 +108,13 @@ header,.hero,.strip,.features,.about-strip,.products,.news,.cta-banner,footer{
 .products{ width: 90%; transform: translateX(30px); background:rgba(255,255,255,0.8); }
 .news{ width: 96%; transform: translateX(-20px); background:rgba(255,255,255,0.8); }
 .cta-banner{ width: 85%; transform: translateX(10px); background:rgba(232,242,251,0.8); }
-footer{ max-width: 100%; margin-inline: auto; width: 100%; position: relative; background:var(--theme-white); }
+footer{ 
+  width: 90%; 
+  transform: translateX(-20px); 
+  border: 1px solid var(--theme-border); 
+  background: var(--theme-white); 
+  margin-bottom: 40px;
+}
 
 /* BACKGROUND SCHEMATIC */
 #bgSchematicContainer {
@@ -930,16 +936,14 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
 </section>
 
 <!-- FOOTER -->
-<footer style="border-top: 1px solid var(--theme-border);">
-  <div style="max-width: 1440px; margin: 0 auto; width: 95%;">
-    <div class="footer-bottom">
-      <p>© 2026 PROCAM Polska Sp. z o.o. Wszelkie prawa zastrzeżone.</p>
-      <div class="footer-links">
-        <a href="#">Polityka prywatności</a>
-        <a href="#">RODO</a>
-        <a href="#">Cookies</a>
-        <a href="#">Sygnaliści</a>
-      </div>
+<footer>
+  <div class="footer-bottom">
+    <p>© 2026 PROCAM Polska Sp. z o.o. Wszelkie prawa zastrzeżone.</p>
+    <div class="footer-links">
+      <a href="#">Polityka prywatności</a>
+      <a href="#">RODO</a>
+      <a href="#">Cookies</a>
+      <a href="#">Sygnaliści</a>
     </div>
   </div>
 </footer>
