@@ -33,14 +33,6 @@ body{
   font-family:'Inter',sans-serif;
   color:var(--dark);
   background-color:var(--theme-primary);
-  background-image:
-    linear-gradient(rgba(11,63,105,.09) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(11,63,105,.09) 1px,transparent 1px),
-    linear-gradient(rgba(11,63,105,.045) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(11,63,105,.045) 1px,transparent 1px),
-    radial-gradient(circle at 18% 14%,rgba(102,180,231,.12),transparent 36%);
-  background-size:120px 120px,120px 120px,24px 24px,24px 24px,100% 100%;
-  background-position:-1px -1px,-1px -1px,-1px -1px,-1px -1px,0 0;
   overflow-x:hidden;
 }
 a{text-decoration:none;color:inherit}
@@ -127,7 +119,7 @@ nav{display:flex;align-items:center;gap:4px}
 }
 
 /* HERO */
-.hero{position:relative;background:linear-gradient(135deg,var(--theme-white) 0%,var(--theme-surface) 60%,var(--theme-surface-alt) 100%);min-height:520px;display:flex;align-items:center;overflow:hidden}
+.hero{position:relative;background:var(--theme-surface);min-height:520px;display:flex;align-items:center;overflow:hidden}
 .hero-bg{position:absolute;inset:0;background-image:url('https://www.procam.pl/wp-content/themes/procam/img/squares.svg');background-size:cover;opacity:.08}
 .hero-content{position:relative;z-index:1;max-width:700px;padding:80px 40px 80px 80px}
 .hero-label{display:inline-block;background:transparent;color:var(--theme-secondary);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 14px;border:1px solid var(--theme-secondary);border-radius:0;margin-bottom:22px}
@@ -142,8 +134,10 @@ nav{display:flex;align-items:center;gap:4px}
 
 /* CARDS STRIP */
 .strip{background:var(--theme-surface-alt);padding:18px 40px;display:flex;gap:32px;align-items:center;overflow-x:auto}
+.strip::before{content:'';position:absolute;left:24px;right:24px;top:50%;border-top:1px dashed var(--theme-border);pointer-events:none;opacity:.7}
 .strip-item{display:flex;align-items:center;gap:10px;color:var(--dark);font-size:13px;font-weight:600;white-space:nowrap;flex-shrink:0}
 .strip-item svg{flex-shrink:0;stroke:var(--theme-accent-deep)!important}
+.strip-item{position:relative;z-index:1}
 
 /* FEATURES */
 .features{padding:72px 40px;max-width:1280px;margin:0 auto;background:rgba(102,180,231,.08)}
@@ -155,7 +149,7 @@ nav{display:flex;align-items:center;gap:4px}
 .card{position:relative;border-radius:0;overflow:hidden;aspect-ratio:3/2.2;cursor:pointer;group;border:1px solid var(--theme-border);box-shadow:inset 0 0 0 1px rgba(11,63,105,.08)}
 .card img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease;filter:grayscale(1) contrast(1.15) brightness(.78) sepia(.32) hue-rotate(160deg) saturate(2.1)}
 .card:hover img{transform:scale(1.04)}
-.card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(11,63,105,.74) 0%,rgba(11,63,105,.24) 60%,transparent 100%)}
+.card-overlay{position:absolute;inset:0;background:rgba(11,63,105,.52)}
 .card-body{position:absolute;bottom:0;left:0;right:0;padding:20px}
 .card-tag{display:inline-block;background:transparent;color:var(--theme-secondary);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--theme-secondary);border-radius:0;margin-bottom:8px}
 .card h3{color:#fff;font-size:16px;font-weight:700;line-height:1.3;margin-bottom:6px}
@@ -173,6 +167,24 @@ nav{display:flex;align-items:center;gap:4px}
   z-index:2;
 }
 .card-body,.news-main-body,.news-card-body,.product-body{z-index:3}
+.card::after{content:'';position:absolute;top:12px;right:12px;width:34px;height:34px;border:1px solid var(--theme-secondary);border-left-color:transparent;border-bottom-color:transparent;border-radius:50%;pointer-events:none;z-index:2}
+.product-card::after{content:'';position:absolute;top:12px;left:12px;width:8px;height:8px;border:1px solid var(--theme-border);border-radius:50%;box-shadow:18px 0 0 -2px var(--theme-white),18px 0 0 1px var(--theme-border),36px 0 0 -2px var(--theme-white),36px 0 0 1px var(--theme-border);pointer-events:none;z-index:2}
+.news-main::after{content:'';position:absolute;right:12px;bottom:12px;width:120px;height:120px;border:1px solid var(--theme-border);border-top-color:transparent;border-left-color:transparent;border-radius:50%;pointer-events:none;z-index:2}
+.news-card::after{content:'';position:absolute;right:12px;top:50%;width:26px;height:1px;background:var(--theme-border);pointer-events:none;z-index:2}
+.stat::after{content:'';position:absolute;left:12px;top:12px;width:26px;height:26px;border:1px solid var(--theme-border);border-right-color:transparent;border-radius:50%;pointer-events:none;z-index:2}
+.hero::before,.features::before,.about-strip::before,.products::before,.news::before,.cta-banner::before{
+  content:'';
+  position:absolute;
+  border:1px solid var(--theme-border);
+  border-radius:50%;
+  pointer-events:none;
+}
+.hero::before{width:220px;height:220px;right:6%;top:8%;border-left-color:transparent;border-bottom-color:transparent}
+.features::before{width:180px;height:180px;left:-70px;top:30px;border-right-color:transparent;border-bottom-color:transparent}
+.about-strip::before{width:150px;height:150px;right:22px;bottom:18px;border-top-color:transparent;border-left-color:transparent}
+.products::before{width:140px;height:140px;left:20px;top:22px;border-right-color:transparent;border-top-color:transparent}
+.news::before{width:170px;height:170px;right:-48px;top:40px;border-left-color:transparent;border-bottom-color:transparent}
+.cta-banner::before{width:120px;height:120px;left:50%;top:20px;transform:translateX(-50%);border-top-color:transparent}
 
 /* ABOUT STRIP */
 .about-strip{background:var(--theme-surface);padding:56px 80px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
@@ -224,7 +236,7 @@ nav{display:flex;align-items:center;gap:4px}
 .news-card-body h4{font-size:13px;font-weight:700;line-height:1.35;color:var(--dark)}
 
 /* CTA BANNER */
-.cta-banner{background:linear-gradient(135deg,var(--theme-surface),var(--theme-surface-alt));padding:72px 80px;text-align:center}
+.cta-banner{background:var(--theme-surface-alt);padding:72px 80px;text-align:center}
 .cta-banner h2{font-family:'Cardo',serif;font-size:clamp(24px,3vw,40px);color:var(--dark);font-weight:700;margin-bottom:16px}
 .cta-banner p{color:var(--gray);font-size:16px;margin-bottom:32px;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.7}
 .cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
@@ -512,7 +524,7 @@ footer{background:var(--theme-white);color:var(--dark)}
     <h2 class="section-title">Sprawdzone produkty dla Twojej uprawy</h2>
     <div class="products-grid">
       <div class="product-card">
-        <div class="product-img" style="background:linear-gradient(135deg,var(--theme-surface-alt),var(--theme-secondary))">
+        <div class="product-img">
           <img src="https://www.procam.pl/wp-content/uploads/2021/06/menu-o-nas-wspolpraca.jpg" alt="Fungicydy" onerror="this.style.display='none'">
         </div>
         <div class="product-body">
@@ -523,7 +535,7 @@ footer{background:var(--theme-white);color:var(--dark)}
         </div>
       </div>
       <div class="product-card">
-        <div class="product-img" style="background:linear-gradient(135deg,var(--theme-surface),var(--theme-accent))">
+        <div class="product-img">
           <img src="https://www.procam.pl/wp-content/uploads/2021/06/menu-o-nas-misja.jpg" alt="Herbicydy" onerror="this.style.display='none'">
         </div>
         <div class="product-body">
@@ -534,7 +546,7 @@ footer{background:var(--theme-white);color:var(--dark)}
         </div>
       </div>
       <div class="product-card">
-        <div class="product-img" style="background:linear-gradient(135deg,var(--theme-surface-alt),var(--theme-accent-soft))">
+        <div class="product-img">
           <img src="https://www.procam.pl/wp-content/uploads/2021/06/menu-o-nas-wartosci.jpg" alt="Nasiona" onerror="this.style.display='none'">
         </div>
         <div class="product-body">
