@@ -118,17 +118,17 @@ footer{ max-width: 100%; margin-inline: auto; width: 100%; position: relative; b
   transform: translateX(-50%);
   width: 100%;
   max-width: 1440px;
-  height: 3500px;
+  height: 4500px;
   pointer-events: none;
   z-index: 2;
   overflow: hidden;
 }
 #heroDiagram {
   position: sticky;
-  top: 0;
+  top: 240px;
   width: 100%;
   height: 100vh;
-  opacity: 0.7;
+  opacity: 0.75;
 }
 
 :is(header,.hero,.strip,.features,.about-strip,.products,.news,.cta-banner,footer)::after{
@@ -580,48 +580,61 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
 <!-- BACKGROUND SCHEMATIC -->
 <div id="bgSchematicContainer">
   <div id="heroDiagram">
-    <svg viewBox="0 0 1440 900" fill="none" stroke="var(--theme-secondary)" stroke-width="0.4" style="width:100%; height:100%;">
+    <svg viewBox="0 0 1440 1200" fill="none" stroke="var(--theme-secondary)" stroke-width="0.4" style="width:100%; height:100%;">
       
-      <!-- LEFT SIDE DIAGRAM: Complex Spindle & Gear Assembly -->
-      <g transform="translate(50, 150) scale(0.9)">
-        <text x="0" y="-20" font-family="var(--mono)" font-size="8" fill="var(--theme-secondary)" font-weight="bold">SECTION A-A: PRIMARY DRIVE ASSEMBLY</text>
-        <path class="draw-path" d="M20 50 H280 V150 H20 Z" stroke-dasharray="860" stroke-dashoffset="516" />
-        <path class="draw-path" d="M40 50 V150 M260 50 V150" stroke-dasharray="100" stroke-dashoffset="60" stroke-dasharray="2 2" />
-        <path class="draw-path" d="M80 30 L220 30 L230 50 H70 Z" stroke-dasharray="320" stroke-dashoffset="192" />
-        <path class="draw-path" d="M80 170 L220 170 L230 150 H70 Z" stroke-dasharray="320" stroke-dashoffset="192" />
-        <circle class="draw-path" cx="150" cy="100" r="40" stroke-dasharray="252" stroke-dashoffset="151" />
-        <circle class="draw-path" cx="150" cy="100" r="35" stroke-dasharray="220" stroke-dashoffset="132" stroke-dasharray="1 1" />
-        <circle class="draw-path" cx="150" cy="75" r="3" stroke-dasharray="20" stroke-dashoffset="12" />
-        <circle class="draw-path" cx="150" cy="125" r="3" stroke-dasharray="20" stroke-dashoffset="12" />
-        <circle class="draw-path" cx="125" cy="100" r="3" stroke-dasharray="20" stroke-dashoffset="12" />
-        <circle class="draw-path" cx="175" cy="100" r="3" stroke-dasharray="20" stroke-dashoffset="12" />
+      <!-- LEFT SIDE DIAGRAM: Complex Industrial Module -->
+      <g transform="translate(40, 50) scale(0.8)">
+        <text x="0" y="-20" font-family="var(--mono)" font-size="10" fill="var(--theme-secondary)" font-weight="bold">MODULE_01: PRIMARY DRIVE TRAIN</text>
+        <path class="draw-path" d="M20 50 H320 V350 H20 Z" stroke-dasharray="1200" stroke-dashoffset="720" />
+        <path class="draw-path" d="M40 50 V350 M300 50 V350" stroke-dasharray="300" stroke-dashoffset="180" stroke-dasharray="2 2" />
+        <!-- Large Gear -->
+        <circle class="draw-path" cx="170" cy="200" r="100" stroke-dasharray="628" stroke-dashoffset="377" />
+        <circle class="draw-path" cx="170" cy="200" r="90" stroke-dasharray="565" stroke-dashoffset="339" stroke-dasharray="1 1" />
+        <!-- Gear details -->
+        <g stroke-width="0.3">
+          <circle class="draw-path" cx="170" cy="130" r="20" stroke-dasharray="125" stroke-dashoffset="75" />
+          <circle class="draw-path" cx="170" cy="270" r="20" stroke-dasharray="125" stroke-dashoffset="75" />
+          <circle class="draw-path" cx="100" cy="200" r="20" stroke-dasharray="125" stroke-dashoffset="75" />
+          <circle class="draw-path" cx="240" cy="200" r="20" stroke-dasharray="125" stroke-dashoffset="75" />
+        </g>
+        <path class="draw-path" d="M170 100 V300 M70 200 H270" stroke-dasharray="200" stroke-dashoffset="120" stroke-dasharray="5 5" />
+        <!-- External hydraulic lines -->
+        <path class="draw-path" d="M320 150 H400 V600 H100" stroke-dasharray="850" stroke-dashoffset="510" stroke-dasharray="10 5" />
+        <rect class="draw-path" x="80" y="600" width="150" height="200" stroke-dasharray="700" stroke-dashoffset="420" />
+        <text x="90" y="620" font-family="var(--mono)" font-size="6" fill="var(--theme-muted)">AUX_RESERVOIR_REF_04</text>
       </g>
 
-      <!-- RIGHT SIDE DIAGRAM: High-Complexity Multi-View Detail -->
-      <g transform="translate(1050, 120) scale(0.85)">
-        <text x="0" y="-20" font-family="var(--mono)" font-size="8" fill="var(--theme-secondary)" font-weight="bold">REF_DRAWING: HSK-INTERFACE_V4</text>
-        <path class="draw-path" d="M50 50 L300 50 L280 250 L70 250 Z" stroke-dasharray="900" stroke-dashoffset="540" />
-        <path class="draw-path" d="M80 70 L270 70 L255 230 L95 230 Z" stroke-dasharray="700" stroke-dashoffset="420" stroke-dasharray="2 1" />
-        <rect class="draw-path" x="120" y="100" width="110" height="80" stroke-dasharray="380" stroke-dashoffset="228" />
-        <circle class="draw-path" cx="175" cy="140" r="25" stroke-dasharray="158" stroke-dashoffset="95" />
-        <path class="draw-path" d="M175 115 V165 M150 140 H200" stroke-dasharray="100" stroke-dashoffset="60" stroke-dasharray="4 2" />
+      <!-- RIGHT SIDE DIAGRAM: High-Complexity Precision Interface -->
+      <g transform="translate(1000, 30) scale(0.75)">
+        <text x="0" y="-20" font-family="var(--mono)" font-size="10" fill="var(--theme-secondary)" font-weight="bold">MODULE_02: SENSOR_CORE & HSK_V5</text>
+        <path class="draw-path" d="M50 50 L380 50 L340 500 L90 500 Z" stroke-dasharray="1600" stroke-dashoffset="960" />
+        <path class="draw-path" d="M80 80 L350 80 L310 470 L120 470 Z" stroke-dasharray="1300" stroke-dashoffset="780" stroke-dasharray="2 1" />
+        <!-- Precision Core Assembly -->
+        <rect class="draw-path" x="160" y="120" width="120" height="250" stroke-dasharray="740" stroke-dashoffset="444" />
+        <circle class="draw-path" cx="220" cy="245" r="50" stroke-dasharray="314" stroke-dashoffset="188" />
+        <path class="draw-path" d="M160 120 V370 M280 120 V370" stroke-dasharray="250" stroke-dashoffset="150" opacity="0.3" />
         <defs>
-          <pattern id="hatchRight" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <pattern id="hatchRightNew" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
             <line x1="0" y1="0" x2="0" y2="4" stroke="var(--theme-secondary)" stroke-width="0.1" />
           </pattern>
         </defs>
-        <path id="hatchRight1" d="M50 50 L80 70 L95 230 L70 250 Z" fill="url(#hatchRight)" opacity="0" />
-        <path id="hatchRight2" d="M300 50 L270 70 L255 230 L280 250 Z" fill="url(#hatchRight)" opacity="0" />
-        <g font-family="var(--mono)" font-size="6" fill="var(--theme-secondary)">
-          <text x="310" y="60">ISO_G6.3_COMPLIANT</text>
-          <text x="310" y="80">THR_SPEC: M16x1.5</text>
-          <text x="310" y="100">MAT: 34CrNiMo6</text>
+        <path id="hatchRight1" d="M50 50 L80 80 L120 470 L90 500 Z" fill="url(#hatchRightNew)" opacity="0" />
+        <path id="hatchRight2" d="M380 50 L350 80 L310 470 L340 500 Z" fill="url(#hatchRightNew)" opacity="0" />
+        <!-- Callout list -->
+        <g font-family="var(--mono)" font-size="7" fill="var(--theme-secondary)">
+          <text x="400" y="100">1. THERMAL_ARRAY_A</text>
+          <text x="400" y="130">2. OPTICAL_ALIGN_Z</text>
+          <text x="400" y="160">3. FEEDBACK_LOOP_01</text>
+          <text x="400" y="190">TOL: ±0.002mm</text>
         </g>
+        <!-- Spilling details -->
+        <path class="draw-path" d="M220 500 V800 H-50" stroke-dasharray="600" stroke-dashoffset="360" stroke-dasharray="5 2" />
+        <circle class="draw-path" cx="220" cy="850" r="60" stroke-dasharray="377" stroke-dashoffset="226" />
       </g>
 
-      <!-- Connecting Schematic Lines -->
-      <path class="draw-path" d="M350 250 C500 250, 600 450, 1050 450" stroke-dasharray="800" stroke-dashoffset="480" stroke-dasharray="10 5" opacity="0.2" />
-      <path class="draw-path" d="M350 300 H650 V650 H1050" stroke-dasharray="1000" stroke-dashoffset="600" stroke-dasharray="2 2" opacity="0.15" />
+      <!-- Interconnecting Schematic Web -->
+      <path class="draw-path" d="M360 200 C500 200, 600 700, 1000 700" stroke-dasharray="1300" stroke-dashoffset="780" stroke-dasharray="10 5" opacity="0.2" />
+      <path class="draw-path" d="M360 300 H650 V1100 H1000" stroke-dasharray="1600" stroke-dashoffset="960" stroke-dasharray="2 2" opacity="0.15" />
 
     </svg>
   </div>
@@ -1059,21 +1072,21 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
   if (heroDiagram) {
     // Initialize paths
     drawPaths.forEach(path => {
-      const length = path.getTotalLength() || 500;
+      const length = path.getTotalLength() || 1000;
       path.style.strokeDasharray = length;
       path.style.strokeDashoffset = length * 0.6; // Start 40% drawn
     });
 
     window.addEventListener('scroll', function() {
       const scrollY = window.scrollY;
-      const maxScroll = 1200; 
+      const maxScroll = 300; // Animation finishes quickly (30% of hero height)
       
       const scrollProgress = Math.min(scrollY / maxScroll, 1);
       const progress = 0.4 + (scrollProgress * 0.6); 
 
       // 1. Draw paths
       drawPaths.forEach(path => {
-        const length = path.getTotalLength() || 500;
+        const length = path.getTotalLength() || 1000;
         path.style.strokeDashoffset = length * (1 - progress);
       });
 
@@ -1089,7 +1102,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
 
       // Parallax effect
       if (bgContainer) {
-        bgContainer.style.transform = `translate(-50%, ${scrollY * 0.1}px)`;
+        bgContainer.style.transform = `translate(-50%, ${scrollY * 0.15}px)`;
       }
     });
   }
