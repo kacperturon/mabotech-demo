@@ -564,63 +564,41 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
   <div class="hero-bg"></div>
   <div class="hero-content">
     <!-- TECHNICAL DRAWING OVERLAY -->
-    <div id="heroDiagram" style="position:absolute; right:-10%; top:-20px; width:500px; height:400px; opacity:0.3; pointer-events:none; z-index:0; transition: transform 0.1s ease-out;">
+    <div id="heroDiagram" style="position:absolute; right:-5%; top:150px; width:500px; height:400px; opacity:0.4; pointer-events:none; z-index:0;">
       <svg viewBox="0 0 250 180" fill="none" stroke="var(--theme-secondary)" stroke-width="0.3">
-        <!-- Main Body Cross-Section -->
-        <path d="M20 60 L80 60 L85 45 L110 45 L110 55 L115 55 L115 105 L110 105 L110 115 L85 115 L80 100 L20 100 Z" />
-        <path d="M20 70 L80 70 M20 90 L80 90" stroke-dasharray="1 1" />
-        <path d="M85 80 L115 80" stroke-dasharray="5 2 1 2" />
+        <!-- Main Body Cross-Section (Drawn on scroll) -->
+        <path class="draw-path" d="M20 60 L80 60 L85 45 L110 45 L110 55 L115 55 L115 105 L110 105 L110 115 L85 115 L80 100 L20 100 Z" stroke-dasharray="400" stroke-dashoffset="400" />
+        <path d="M20 70 L80 70 M20 90 L80 90" stroke-dasharray="1 1" opacity="0.5" />
+        <path class="draw-path" d="M85 80 L115 80" stroke-dasharray="30" stroke-dashoffset="30" />
         
-        <!-- Hatching for cross-section -->
+        <!-- Hatching (Appears later) -->
         <defs>
           <pattern id="hatchComplex" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
             <line x1="0" y1="0" x2="0" y2="3" stroke="var(--theme-secondary)" stroke-width="0.1" />
           </pattern>
         </defs>
-        <path d="M85 45 L110 45 L110 55 L85 55 Z" fill="url(#hatchComplex)" />
-        <path d="M85 105 L110 105 L110 115 L85 115 Z" fill="url(#hatchComplex)" />
+        <path id="hatch1" d="M85 45 L110 45 L110 55 L85 55 Z" fill="url(#hatchComplex)" opacity="0" />
+        <path id="hatch2" d="M85 105 L110 105 L110 115 L85 115 Z" fill="url(#hatchComplex)" opacity="0" />
         
-        <!-- Front View (Circular) -->
-        <circle cx="180" cy="80" r="35" />
-        <circle cx="180" cy="80" r="32" stroke-dasharray="1 1" />
-        <circle cx="180" cy="80" r="15" />
-        <path d="M145 80 H215 M180 45 V115" stroke-dasharray="4 2 1 2" />
-        <circle cx="180" cy="55" r="3" />
-        <circle cx="180" cy="105" r="3" />
-        <circle cx="155" cy="80" r="3" />
-        <circle cx="205" cy="80" r="3" />
+        <!-- Front View (Drawn on scroll) -->
+        <circle class="draw-path" cx="180" cy="80" r="35" stroke-dasharray="220" stroke-dashoffset="220" />
+        <circle cx="180" cy="80" r="32" stroke-dasharray="1 1" opacity="0.3" />
+        <circle class="draw-path" cx="180" cy="80" r="15" stroke-dasharray="95" stroke-dashoffset="95" />
+        <path d="M145 80 H215 M180 45 V115" stroke-dasharray="4 2 1 2" opacity="0.3" />
 
-        <!-- Dimension Lines -->
-        <g stroke-width="0.2" stroke="var(--theme-muted)">
-          <!-- Horizontal dimensions -->
-          <path d="M20 30 V130 M85 30 V130 M115 30 V130" stroke-dasharray="2 2" />
-          <path d="M20 35 H85" />
-          <path d="M20 33 L20 37 M85 33 L85 37" />
-          <path d="M85 35 H115" />
-          <path d="M115 33 L115 37" />
-          
-          <!-- Vertical dimensions -->
-          <path d="M5 60 H20 M5 100 H20" stroke-dasharray="2 2" />
-          <path d="M10 60 V100" />
-          <path d="M8 60 L12 60 M8 100 L12 100" />
+        <!-- Dimension Lines (Drawn on scroll) -->
+        <g id="dimLines" opacity="0">
+          <g stroke-width="0.2" stroke="var(--theme-muted)">
+            <path d="M20 35 H85" />
+            <path d="M85 35 H115" />
+            <path d="M10 60 V100" />
+          </g>
+          <g font-family="monospace" font-size="3.5" fill="var(--theme-secondary)">
+            <text x="45" y="32">65.00 ±0.05</text>
+            <text x="92" y="32">30.00</text>
+            <text x="185" y="118">HSK-A 63</text>
+          </g>
         </g>
-
-        <!-- Technical Callouts -->
-        <g font-family="monospace" font-size="3.5" fill="var(--theme-secondary)">
-          <text x="45" y="32">65.00 ±0.05</text>
-          <text x="92" y="32">30.00</text>
-          <text x="2" y="82" transform="rotate(-90 2 82)">Ø 40 h6</text>
-          <text x="185" y="48">4x Ø 6.00</text>
-          <text x="185" y="118">HSK-A 63</text>
-          <text x="20" y="140">TOLERANCING ISO 8015</text>
-          <text x="20" y="148">MATERIAL: 1.2344 / 52-54 HRC</text>
-          <text x="180" y="148" text-anchor="middle" font-weight="bold">SCALE 1:2</text>
-        </g>
-
-        <!-- Detail Circle -->
-        <circle cx="82" cy="52" r="8" stroke="var(--theme-muted)" stroke-dasharray="2 2" />
-        <path d="M88 48 L130 25" stroke="var(--theme-muted)" stroke-width="0.2" />
-        <text x="132" y="25" font-family="monospace" font-size="4" fill="var(--theme-muted)">DETAIL Z</text>
       </svg>
     </div>
 
@@ -1090,16 +1068,44 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
   // close drawer on ESC
   document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeMenu(); });
 
-  // Scroll animation for hero diagram
+  // Scroll animation for hero diagram (Drawing effect)
   const heroDiagram = document.getElementById('heroDiagram');
+  const drawPaths = document.querySelectorAll('.draw-path');
+  const hatch1 = document.getElementById('hatch1');
+  const hatch2 = document.getElementById('hatch2');
+  const dimLines = document.getElementById('dimLines');
+
   if (heroDiagram) {
     window.addEventListener('scroll', function() {
       const scrollY = window.scrollY;
-      const rotate = scrollY * 0.05;
-      const translateX = scrollY * 0.2;
-      const translateY = scrollY * -0.1;
-      const scale = 1 + (scrollY * 0.0002);
-      heroDiagram.style.transform = `translate(${translateX}px, ${translateY}px) rotate(${rotate}deg) scale(${scale})`;
+      const maxScroll = 600; // Animation finishes after 600px scroll
+      const progress = Math.min(scrollY / maxScroll, 1);
+
+      // 1. Draw paths
+      drawPaths.forEach(path => {
+        const length = path.getTotalLength();
+        // Since we set initial stroke-dasharray and dashoffset in HTML, we use them
+        const initialOffset = parseFloat(path.getAttribute('stroke-dashoffset'));
+        path.style.strokeDashoffset = initialOffset * (1 - progress);
+      });
+
+      // 2. Fade in hatching (starts after 50% progress)
+      if (progress > 0.5) {
+        const hatchProgress = (progress - 0.5) * 2;
+        if(hatch1) hatch1.style.opacity = hatchProgress;
+        if(hatch2) hatch2.style.opacity = hatchProgress;
+      } else {
+        if(hatch1) hatch1.style.opacity = 0;
+        if(hatch2) hatch2.style.opacity = 0;
+      }
+
+      // 3. Fade in dimensions (starts after 80% progress)
+      if (progress > 0.8) {
+        const dimProgress = (progress - 0.8) * 5;
+        if(dimLines) dimLines.style.opacity = dimProgress;
+      } else {
+        if(dimLines) dimLines.style.opacity = 0;
+      }
     });
   }
 })();
