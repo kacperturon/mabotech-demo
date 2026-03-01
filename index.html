@@ -530,6 +530,71 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
   </div>
 </header>
 
+<!-- BACKGROUND SCHEMATIC -->
+<div id="bgSchematicContainer" style="position:absolute; top:80px; left:0; width:100%; height:1800px; pointer-events:none; z-index:0; overflow:hidden;">
+  <div id="heroDiagram" style="position:sticky; top:150px; width:100%; height:800px; opacity:0.3;">
+    <svg viewBox="0 0 800 600" fill="none" stroke="var(--theme-secondary)" stroke-width="0.3" style="width:100%; height:100%;">
+      <!-- VIEW A: MAIN SPINDLE ASSEMBLY -->
+      <g transform="translate(50, 100) scale(1.5)">
+        <text x="0" y="-20" font-family="var(--mono)" font-size="6" fill="var(--theme-secondary)" font-weight="bold">VIEW A-A: SPINDLE INTERFACE</text>
+        <path class="draw-path" d="M20 60 L80 60 L85 45 L110 45 L110 55 L115 55 L115 105 L110 105 L110 115 L85 115 L80 100 L20 100 Z" stroke-dasharray="400" stroke-dashoffset="240" />
+        <path d="M20 70 L80 70 M20 90 L80 90" stroke-dasharray="1 1" opacity="0.5" />
+        <path class="draw-path" d="M85 80 L115 80" stroke-dasharray="30" stroke-dashoffset="18" />
+        <defs>
+          <pattern id="hatchMain" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="3" stroke="var(--theme-secondary)" stroke-width="0.1" />
+          </pattern>
+        </defs>
+        <path id="hatch1" d="M85 45 L110 45 L110 55 L85 55 Z" fill="url(#hatchMain)" opacity="0" />
+        <path id="hatch2" d="M85 105 L110 105 L110 115 L85 115 Z" fill="url(#hatchMain)" opacity="0" />
+      </g>
+
+      <!-- VIEW B: TOOL HOLDER DETAIL -->
+      <g transform="translate(450, 50) scale(1.2)">
+        <text x="0" y="-10" font-family="var(--mono)" font-size="6" fill="var(--theme-secondary)" font-weight="bold">VIEW B: HSK-63A DETAIL</text>
+        <circle class="draw-path" cx="100" cy="80" r="50" stroke-dasharray="315" stroke-dashoffset="189" />
+        <circle class="draw-path" cx="100" cy="80" r="45" stroke-dasharray="282" stroke-dashoffset="169" stroke-dasharray="2 1" />
+        <circle class="draw-path" cx="100" cy="80" r="20" stroke-dasharray="125" stroke-dashoffset="75" />
+        <path d="M40 80 H160 M100 20 V140" stroke-dasharray="4 2 1 2" opacity="0.4" />
+        <circle class="draw-path" cx="100" cy="40" r="4" stroke-dasharray="25" stroke-dashoffset="15" />
+        <circle class="draw-path" cx="100" cy="120" r="4" stroke-dasharray="25" stroke-dashoffset="15" />
+      </g>
+
+      <!-- VIEW C: GEAR TRAIN SCHEMATIC -->
+      <g transform="translate(100, 350) scale(0.8)">
+        <text x="0" y="-10" font-family="var(--mono)" font-size="8" fill="var(--theme-secondary)" font-weight="bold">VIEW C: DRIVE TRAIN RATIO 1:1.4</text>
+        <circle class="draw-path" cx="50" cy="50" r="40" stroke-dasharray="250" stroke-dashoffset="150" />
+        <path class="draw-path" d="M50 50 L150 50" stroke-dasharray="100" stroke-dashoffset="60" stroke-dasharray="5 2" />
+        <circle class="draw-path" cx="150" cy="50" r="60" stroke-dasharray="380" stroke-dashoffset="228" />
+        <!-- Gear teeth simulation -->
+        <path d="M45 5 L55 5 M145 -15 L155 -15" stroke-width="2" />
+      </g>
+
+      <!-- DIMENSIONS & SPECS -->
+      <g id="dimLines" opacity="0.4">
+        <g stroke-width="0.2" stroke="var(--theme-muted)">
+          <path d="M80 180 H250 M450 200 H600" stroke-dasharray="2 2" />
+          <path d="M500 50 L550 20" />
+        </g>
+        <g font-family="var(--mono)" font-size="5" fill="var(--theme-secondary)">
+          <text x="80" y="280">ISO 12100:2010 SAFETY SPEC</text>
+          <text x="80" y="290">TOLERANCE CLASS: FINE (DIN ISO 2768)</text>
+          <text x="555" y="20">REF: DIN 69893-1</text>
+          <text x="450" y="250">SURFACE FINISH: Ra 0.8</text>
+        </g>
+      </g>
+
+      <!-- DATA BLOCK -->
+      <rect x="650" y="500" width="130" height="80" stroke="var(--theme-border-strong)" stroke-width="0.5" />
+      <line x1="650" y1="520" x2="780" y2="520" stroke="var(--theme-border-strong)" />
+      <line x1="650" y1="540" x2="780" y2="540" stroke="var(--theme-border-strong)" />
+      <text x="655" y="514" font-family="var(--mono)" font-size="4" fill="var(--theme-muted)">DRAWING NO: PROCAM-ENG-042</text>
+      <text x="655" y="534" font-family="var(--mono)" font-size="4" fill="var(--theme-muted)">REVISION: B (03/2026)</text>
+      <text x="655" y="554" font-family="var(--mono)" font-size="4" fill="var(--theme-muted)">APPROVED: AGRO_ENG_DEPT</text>
+    </svg>
+  </div>
+</div>
+
 <!-- HERO -->
 <section class="hero">
   <div class="corner-br corner-tl"></div>
@@ -537,71 +602,10 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
   <div class="eng-label" style="top:20px; left:20px;">[SYS_ID: 44.20.01]</div>
   <div class="eng-label" style="bottom:20px; left:20px;">REF: DIN_69893_HSK</div>
   
-  <!-- COMPLEX DIAGRAM -->
-  <div style="position:absolute; right:8%; top:15%; width:450px; height:450px; opacity:0.25; pointer-events:none; z-index:0;">
-    <svg viewBox="0 0 200 200" fill="none" stroke="var(--theme-secondary)" stroke-width="0.4">
-      <circle cx="100" cy="100" r="80" stroke-dasharray="2 1" />
-      <circle cx="100" cy="100" r="45" />
-      <circle cx="100" cy="100" r="42" stroke-dasharray="1 1" />
-      <path d="M10 100h180M100 10v180" stroke-dasharray="4 2" />
-      <path d="M40 40l120 120M40 160l120-120" stroke-dasharray="1 2" />
-      <rect x="75" y="75" width="50" height="50" />
-      <path d="M75 100l25-25 25 25-25 25-25-25z" />
-      <path d="M90 10l5 5 5-5M90 190l5-5 5 5" stroke-width="1" />
-      <text x="105" y="15" font-family="monospace" font-size="5" fill="var(--theme-secondary)">Ø 160.00 H7</text>
-      <text x="155" y="98" font-family="monospace" font-size="5" fill="var(--theme-secondary)">SQ 50.00</text>
-      <defs>
-        <pattern id="hatchHero" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-          <line x1="0" y1="0" x2="0" y2="3" stroke="var(--theme-secondary)" stroke-width="0.15" />
-        </pattern>
-      </defs>
-      <circle cx="100" cy="100" r="18" fill="url(#hatchHero)" stroke="none" />
-      <path d="M60 20 L60 180" stroke-dasharray="2 2" />
-      <path d="M140 20 L140 180" stroke-dasharray="2 2" />
-    </svg>
-  </div>
+  <!-- COMPLEX DIAGRAM REMOVED FROM HERE -->
 
   <div class="hero-bg"></div>
-  <div class="hero-content">
-    <!-- TECHNICAL DRAWING OVERLAY -->
-    <div id="heroDiagram" style="position:absolute; right:-5%; top:150px; width:500px; height:400px; opacity:0.4; pointer-events:none; z-index:0;">
-      <svg viewBox="0 0 250 180" fill="none" stroke="var(--theme-secondary)" stroke-width="0.3">
-        <!-- Main Body Cross-Section (Drawn on scroll) -->
-        <path class="draw-path" d="M20 60 L80 60 L85 45 L110 45 L110 55 L115 55 L115 105 L110 105 L110 115 L85 115 L80 100 L20 100 Z" stroke-dasharray="400" stroke-dashoffset="400" />
-        <path d="M20 70 L80 70 M20 90 L80 90" stroke-dasharray="1 1" opacity="0.5" />
-        <path class="draw-path" d="M85 80 L115 80" stroke-dasharray="30" stroke-dashoffset="30" />
-        
-        <!-- Hatching (Appears later) -->
-        <defs>
-          <pattern id="hatchComplex" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-            <line x1="0" y1="0" x2="0" y2="3" stroke="var(--theme-secondary)" stroke-width="0.1" />
-          </pattern>
-        </defs>
-        <path id="hatch1" d="M85 45 L110 45 L110 55 L85 55 Z" fill="url(#hatchComplex)" opacity="0" />
-        <path id="hatch2" d="M85 105 L110 105 L110 115 L85 115 Z" fill="url(#hatchComplex)" opacity="0" />
-        
-        <!-- Front View (Drawn on scroll) -->
-        <circle class="draw-path" cx="180" cy="80" r="35" stroke-dasharray="220" stroke-dashoffset="220" />
-        <circle cx="180" cy="80" r="32" stroke-dasharray="1 1" opacity="0.3" />
-        <circle class="draw-path" cx="180" cy="80" r="15" stroke-dasharray="95" stroke-dashoffset="95" />
-        <path d="M145 80 H215 M180 45 V115" stroke-dasharray="4 2 1 2" opacity="0.3" />
-
-        <!-- Dimension Lines (Drawn on scroll) -->
-        <g id="dimLines" opacity="0">
-          <g stroke-width="0.2" stroke="var(--theme-muted)">
-            <path d="M20 35 H85" />
-            <path d="M85 35 H115" />
-            <path d="M10 60 V100" />
-          </g>
-          <g font-family="monospace" font-size="3.5" fill="var(--theme-secondary)">
-            <text x="45" y="32">65.00 ±0.05</text>
-            <text x="92" y="32">30.00</text>
-            <text x="185" y="118">HSK-A 63</text>
-          </g>
-        </g>
-      </svg>
-    </div>
-
+  <div class="hero-content" style="background: rgba(255,255,255,0.7); backdrop-filter: blur(2px);">
     <span class="hero-label">Lider dystrybucji</span>
     <h1>Profesjonalna dystrybucja środków ochrony roślin, nasion i nawozów rolniczych</h1>
     <p>Wspieramy rolników na każdym etapie – od doboru optymalnego materiału siewnego, przez monitoring upraw, aż po sprawną realizację transakcji przy umowach skupu.</p>
@@ -1078,33 +1082,36 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
   if (heroDiagram) {
     window.addEventListener('scroll', function() {
       const scrollY = window.scrollY;
-      const maxScroll = 600; // Animation finishes after 600px scroll
-      const progress = Math.min(scrollY / maxScroll, 1);
+      const maxScroll = 1200; // Animation spans Hero + Strip + Features
+      
+      // Map scroll 0 -> maxScroll to progress 0.4 -> 1.0
+      const scrollProgress = Math.min(scrollY / maxScroll, 1);
+      const progress = 0.4 + (scrollProgress * 0.6);
 
       // 1. Draw paths
       drawPaths.forEach(path => {
-        const length = path.getTotalLength();
-        // Since we set initial stroke-dasharray and dashoffset in HTML, we use them
-        const initialOffset = parseFloat(path.getAttribute('stroke-dashoffset'));
+        const length = path.getTotalLength() || 400; // Fallback if length not yet available
+        const initialOffset = parseFloat(path.getAttribute('stroke-dashoffset')) || length;
+        // Since initial is 40%, we calculate current offset based on 0..1 progress
         path.style.strokeDashoffset = initialOffset * (1 - progress);
       });
 
-      // 2. Fade in hatching (starts after 50% progress)
-      if (progress > 0.5) {
-        const hatchProgress = (progress - 0.5) * 2;
-        if(hatch1) hatch1.style.opacity = hatchProgress;
-        if(hatch2) hatch2.style.opacity = hatchProgress;
+      // 2. Fade in hatching (starts after 60% total progress)
+      if (progress > 0.6) {
+        const hatchProgress = (progress - 0.6) * 2.5;
+        if(hatch1) hatch1.style.opacity = Math.min(hatchProgress, 1);
+        if(hatch2) hatch2.style.opacity = Math.min(hatchProgress, 1);
       } else {
         if(hatch1) hatch1.style.opacity = 0;
         if(hatch2) hatch2.style.opacity = 0;
       }
 
-      // 3. Fade in dimensions (starts after 80% progress)
-      if (progress > 0.8) {
-        const dimProgress = (progress - 0.8) * 5;
-        if(dimLines) dimLines.style.opacity = dimProgress;
+      // 3. Fade in dimensions (starts after 85% total progress)
+      if (progress > 0.85) {
+        const dimProgress = (progress - 0.85) * 6.6;
+        if(dimLines) dimLines.style.opacity = Math.min(dimProgress, 1);
       } else {
-        if(dimLines) dimLines.style.opacity = 0;
+        if(dimLines) dimLines.style.opacity = 0.4; // Initial visible state for dims
       }
     });
   }
