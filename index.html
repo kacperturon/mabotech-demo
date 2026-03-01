@@ -36,10 +36,10 @@ body{
   color:var(--dark);
   background-color:var(--theme-primary);
   background-image:
-    linear-gradient(var(--theme-border) 1px,transparent 1px),
-    linear-gradient(90deg,var(--theme-border) 1px,transparent 1px),
-    linear-gradient(rgba(11,63,105,.05) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(11,63,105,.05) 1px,transparent 1px);
+    linear-gradient(rgba(11,63,105,0.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(11,63,105,0.05) 1px,transparent 1px),
+    linear-gradient(rgba(11,63,105,0.02) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(11,63,105,0.02) 1px,transparent 1px);
   background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
   background-position:-1px -1px;
   overflow-x:hidden;
@@ -81,14 +81,33 @@ header,.hero,.strip,.features,.about-strip,.products,.news,.cta-banner,footer{
   position:relative;
   border-inline:1px solid var(--theme-border);
   background:transparent;
-  z-index: 5;
+  z-index: 1;
 }
 .hero-content, .strip-item, .section-title, .cards-grid {
   position: relative;
-  z-index: 6;
+  z-index: 10;
 }
-.hero{ max-width: 1600px; margin-inline: 0 auto; width: 95%; position: relative; border: 1px solid var(--theme-border); }
-.strip{ max-width: 1300px; margin-inline: auto 40px; width: 90%; position: relative; border: 1px solid var(--theme-border); }
+.hero{ 
+  max-width: 1600px; 
+  margin-inline: auto; 
+  width: 95%; 
+  position: relative; 
+  border: 1px solid var(--theme-border); 
+  min-height: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.hero-content{
+  max-width: 800px;
+  padding: 60px;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(4px);
+  border: 1px solid var(--theme-border);
+}
+.strip{ max-width: 1300px; margin-inline: auto 40px; width: 90%; position: relative; border: 1px solid var(--theme-border); background:transparent; }
+
 .features{ max-width: 1500px; margin-inline: 40px auto; width: 92%; position: relative; border: 1px solid var(--theme-border); }
 .about-strip{ max-width: 1400px; margin-inline: auto; width: 100%; position: relative; border: 1px solid var(--theme-border); background:rgba(232,242,251,0.6); }
 .products{ max-width: 1200px; margin-inline: 80px auto; width: 88%; position: relative; border: 1px solid var(--theme-border); background:var(--theme-white); }
@@ -543,7 +562,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
 </header>
 
 <!-- BACKGROUND SCHEMATIC -->
-<div id="bgSchematicContainer" style="position:absolute; top:0; left:0; width:100%; height:2500px; pointer-events:none; z-index:1; overflow:hidden;">
+<div id="bgSchematicContainer" style="position:absolute; top:0; left:0; width:100%; height:3000px; pointer-events:none; z-index:2; overflow:hidden;">
   <div id="heroDiagram" style="position:sticky; top:100px; width:100%; height:900px; opacity:0.65;">
     <svg viewBox="0 0 1000 800" fill="none" stroke="var(--theme-secondary)" stroke-width="0.35" style="width:100%; height:100%;">
       <!-- COHESIVE BLUEPRINT FRAME -->
@@ -621,7 +640,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
   <!-- COMPLEX DIAGRAM REMOVED FROM HERE -->
 
   <div class="hero-bg" style="background:none;"></div>
-  <div class="hero-content" style="background: rgba(255,255,255,0.7); backdrop-filter: blur(2px);">
+  <div class="hero-content">
     <span class="hero-label">Lider dystrybucji</span>
     <h1>Profesjonalna dystrybucja środków ochrony roślin, nasion i nawozów rolniczych</h1>
     <p>Wspieramy rolników na każdym etapie – od doboru optymalnego materiału siewnego, przez monitoring upraw, aż po sprawną realizację transakcji przy umowach skupu.</p>
@@ -629,9 +648,6 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
       <a href="#" class="btn-primary">Zobacz produkty</a>
       <a href="#" class="btn-outline">Skontaktuj się</a>
     </div>
-  </div>
-  <div class="hero-image">
-    <img src="https://www.procam.pl/wp-content/uploads/2021/06/menu-o-nas-wspolpraca.jpg" alt="">
   </div>
 </section>
 
