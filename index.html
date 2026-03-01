@@ -118,7 +118,7 @@ footer{ max-width: 100%; margin-inline: auto; width: 100%; position: relative; b
   transform: translateX(-50%);
   width: 100%;
   max-width: 1440px;
-  height: 4500px;
+  height: 100%; /* Changed from fixed 4500px to avoid bottom space */
   pointer-events: none;
   z-index: 2;
   overflow: hidden;
@@ -930,14 +930,16 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <div class="footer-bottom">
-    <p>© 2026 PROCAM Polska Sp. z o.o. Wszelkie prawa zastrzeżone.</p>
-    <div class="footer-links">
-      <a href="#">Polityka prywatności</a>
-      <a href="#">RODO</a>
-      <a href="#">Cookies</a>
-      <a href="#">Sygnaliści</a>
+<footer style="border-top: 1px solid var(--theme-border);">
+  <div style="max-width: 1440px; margin: 0 auto; width: 95%;">
+    <div class="footer-bottom">
+      <p>© 2026 PROCAM Polska Sp. z o.o. Wszelkie prawa zastrzeżone.</p>
+      <div class="footer-links">
+        <a href="#">Polityka prywatności</a>
+        <a href="#">RODO</a>
+        <a href="#">Cookies</a>
+        <a href="#">Sygnaliści</a>
+      </div>
     </div>
   </div>
 </footer>
