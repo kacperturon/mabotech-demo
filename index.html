@@ -36,10 +36,10 @@ body{
   color:var(--dark);
   background-color:var(--theme-primary);
   background-image:
-    linear-gradient(rgba(11,63,105,0.05) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(11,63,105,0.05) 1px,transparent 1px),
-    linear-gradient(rgba(11,63,105,0.02) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(11,63,105,0.02) 1px,transparent 1px);
+    linear-gradient(rgba(11,63,105,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(11,63,105,0.03) 1px,transparent 1px),
+    linear-gradient(rgba(11,63,105,0.01) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(11,63,105,0.01) 1px,transparent 1px);
   background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
   background-position:-1px -1px;
   overflow-x:hidden;
@@ -75,9 +75,9 @@ img{max-width:100%;display:block}
 .corner-br-item{bottom:0;right:0;border-left:none;border-top:none}
 
 header,.hero,.strip,.features,.about-strip,.products,.news,.cta-banner,footer{
-  max-width:var(--site-max-width);
+  max-width: 1440px;
   margin-inline:auto;
-  width:100%;
+  width:95%;
   position:relative;
   border-inline:1px solid var(--theme-border);
   background:transparent;
@@ -88,31 +88,26 @@ header,.hero,.strip,.features,.about-strip,.products,.news,.cta-banner,footer{
   z-index: 10;
 }
 .hero{ 
-  max-width: 1600px; 
-  margin-inline: auto; 
-  width: 95%; 
-  position: relative; 
-  border: 1px solid var(--theme-border); 
   min-height: 800px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  transform: translateX(-15px);
 }
 .hero-content{
-  max-width: 800px;
-  padding: 60px;
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(4px);
+  max-width: 700px;
+  padding: 50px;
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(3px);
   border: 1px solid var(--theme-border);
 }
-.strip{ max-width: 1300px; margin-inline: auto 40px; width: 90%; position: relative; border: 1px solid var(--theme-border); background:transparent; }
-
-.features{ max-width: 1500px; margin-inline: 40px auto; width: 92%; position: relative; border: 1px solid var(--theme-border); }
-.about-strip{ max-width: 1400px; margin-inline: auto; width: 100%; position: relative; border: 1px solid var(--theme-border); background:rgba(232,242,251,0.6); }
-.products{ max-width: 1200px; margin-inline: 80px auto; width: 88%; position: relative; border: 1px solid var(--theme-border); background:var(--theme-white); }
-.news{ max-width: 1550px; margin-inline: auto 0; width: 96%; position: relative; border: 1px solid var(--theme-border); background:var(--theme-white); }
-.cta-banner{ max-width: 1100px; margin-inline: auto; width: 100%; position: relative; border: 1px solid var(--theme-border); background:var(--theme-surface-alt); }
+.strip{ width: 92%; transform: translateX(20px); border-top: 1px solid var(--theme-border); }
+.features{ width: 94%; transform: translateX(-10px); }
+.about-strip{ width: 100%; transform: none; background:rgba(232,242,251,0.5); }
+.products{ width: 90%; transform: translateX(30px); background:rgba(255,255,255,0.8); }
+.news{ width: 96%; transform: translateX(-20px); background:rgba(255,255,255,0.8); }
+.cta-banner{ width: 85%; transform: translateX(10px); background:rgba(232,242,251,0.8); }
 footer{ max-width: 100%; margin-inline: auto; width: 100%; position: relative; background:var(--theme-white); }
 
 :is(header,.hero,.strip,.features,.about-strip,.products,.news,.cta-banner,footer)::after{
@@ -562,7 +557,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
 </header>
 
 <!-- BACKGROUND SCHEMATIC -->
-<div id="bgSchematicContainer" style="position:absolute; top:0; left:0; width:100%; height:3000px; pointer-events:none; z-index:2; overflow:hidden;">
+<div id="bgSchematicContainer" style="position:absolute; top:0; left:0; width:100%; height:3500px; pointer-events:none; z-index:2; overflow:hidden;">
   <div id="heroDiagram" style="position:sticky; top:100px; width:100%; height:900px; opacity:0.65;">
     <svg viewBox="0 0 1000 800" fill="none" stroke="var(--theme-secondary)" stroke-width="0.35" style="width:100%; height:100%;">
       <!-- COHESIVE BLUEPRINT FRAME -->
@@ -1063,7 +1058,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
   if (heroDiagram) {
     window.addEventListener('scroll', function() {
       const scrollY = window.scrollY;
-      const maxScroll = 1500; // Animation spans multiple sections
+      const maxScroll = 1500; 
       
       const scrollProgress = Math.min(scrollY / maxScroll, 1);
       const progress = 0.4 + (scrollProgress * 0.6); // Start at 40%
@@ -1072,7 +1067,6 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
       drawPaths.forEach(path => {
         let length = path.getTotalLength();
         if (!length || length === 0) {
-          // Fallback based on stroke-dasharray attribute
           const dashArray = path.getAttribute('stroke-dasharray');
           length = dashArray ? parseFloat(dashArray.split(' ')[0]) : 500;
         }
