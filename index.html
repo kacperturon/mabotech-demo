@@ -124,11 +124,11 @@ footer{ max-width: 100%; margin-inline: auto; width: 100%; position: relative; b
   overflow: hidden;
 }
 #heroDiagram {
-  position: sticky;
+  position: absolute;
   top: 240px;
   width: 100%;
-  height: 100vh;
-  opacity: 0.75;
+  height: 1200px;
+  opacity: 0.45;
 }
 
 :is(header,.hero,.strip,.features,.about-strip,.products,.news,.cta-banner,footer)::after{
@@ -1102,7 +1102,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
 
       // Parallax effect
       if (bgContainer) {
-        bgContainer.style.transform = `translate(-50%, ${scrollY * 0.15}px)`;
+        bgContainer.style.transform = `translate(-50%, ${scrollY * 0.1}px)`;
       }
     });
   }
