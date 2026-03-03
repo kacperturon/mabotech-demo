@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lokalny System Retencyjny - PROCAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cardo:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --theme-primary:#ffffff;
+  --theme-secondary:#0b3f69;
+  --theme-accent:#66b4e7;
+  --theme-accent-deep:#0b3f69;
+  --theme-text:#0b3f69;
+  --theme-muted:#5b7f9b;
+  --theme-surface:#f5faff;
+  --theme-surface-alt:#e8f2fb;
+  --theme-border:rgba(11,63,105,.25);
+  --mono:'JetBrains Mono', monospace;
+}
+body{
+  font-family:'Inter',sans-serif;
+  color:var(--theme-text);
+  background-color:var(--theme-primary);
+  background-image:
+    linear-gradient(rgba(11,63,105,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(11,63,105,.04) 1px,transparent 1px),
+    linear-gradient(rgba(11,63,105,.015) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(11,63,105,.015) 1px,transparent 1px);
+  background-size:100px 100px,100px 100px,20px 20px,20px 20px;
+  background-position:-1px -1px,-1px -1px,-1px -1px,-1px -1px;
+}
+a{text-decoration:none;color:inherit}
+
+.topbar{
+  border-bottom:1px solid var(--theme-border);
+  background:rgba(255,255,255,.95);
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+.topbar-inner{
+  max-width:1440px;
+  margin:0 auto;
+  padding:18px 28px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.brand{
+  font-family:var(--mono);
+  font-size:13px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--theme-secondary);
+}
+.back-link{
+  font-family:var(--mono);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  color:var(--theme-secondary);
+  border:1px solid var(--theme-border);
+  padding:10px 16px;
+}
+
+.page{
+  max-width:1440px;
+  margin:0 auto 56px;
+  padding:0 24px;
+}
+
+.hero{
+  margin-top:24px;
+  border:1px solid var(--theme-border);
+  background:var(--theme-surface);
+  position:relative;
+  min-height:560px;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  right:-90px;
+  top:-80px;
+  width:420px;
+  height:420px;
+  border:1px solid var(--theme-border);
+  border-radius:50%;
+  box-shadow:0 0 0 30px rgba(11,63,105,.08),0 0 0 60px rgba(11,63,105,.04);
+}
+.hero::after{
+  content:'';
+  position:absolute;
+  left:-8%;
+  right:-8%;
+  top:48%;
+  border-top:1px solid var(--theme-border);
+  box-shadow:0 -120px 0 0 rgba(11,63,105,.08),0 120px 0 0 rgba(11,63,105,.08);
+}
+.hero-img{
+  position:absolute;
+  inset:0;
+}
+.hero-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:.48;
+  filter:grayscale(1) contrast(1.2) brightness(.92);
+}
+.hero-panel{
+  position:relative;
+  z-index:2;
+  width:min(760px,92%);
+  margin:56px;
+  background:rgba(255,255,255,.86);
+  border:1px solid var(--theme-border);
+  padding:36px;
+}
+.kicker{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--theme-muted);
+  margin-bottom:14px;
+}
+h1{
+  font-family:'Cardo',serif;
+  font-size:clamp(30px,4vw,54px);
+  line-height:1.08;
+  color:var(--theme-secondary);
+  margin-bottom:14px;
+}
+.hero-sub{
+  font-size:15px;
+  color:var(--theme-muted);
+  line-height:1.7;
+}
+
+.section{
+  position:relative;
+  margin-top:24px;
+  border:1px solid var(--theme-border);
+  background:var(--theme-white, #fff);
+  padding:38px;
+}
+.section::before{
+  content:'';
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:42px;
+  height:42px;
+  border:1px solid var(--theme-border);
+  border-left-color:transparent;
+  border-bottom-color:transparent;
+  border-radius:50%;
+}
+.section::after{
+  content:'';
+  position:absolute;
+  left:-20px;
+  right:-20px;
+  top:22px;
+  border-top:1px dashed var(--theme-border);
+}
+.section h2{
+  font-family:'Cardo',serif;
+  font-size:clamp(24px,3vw,36px);
+  color:var(--theme-secondary);
+  margin-bottom:18px;
+}
+.section p{
+  font-size:16px;
+  line-height:1.8;
+  color:var(--theme-text);
+}
+
+.diag-block{
+  border:1px solid var(--theme-border);
+  margin-top:18px;
+  padding:18px;
+  background:var(--theme-surface);
+  position:relative;
+}
+.diag-block::before{
+  content:'';
+  position:absolute;
+  left:10px;
+  top:10px;
+  width:10px;
+  height:10px;
+  border:1px solid var(--theme-border);
+  transform:rotate(45deg);
+}
+.diag-block::after{
+  content:'';
+  position:absolute;
+  right:10px;
+  bottom:10px;
+  width:54px;
+  height:54px;
+  border:1px solid var(--theme-border);
+  border-top-color:transparent;
+  border-right-color:transparent;
+  border-radius:50%;
+}
+.diag-title{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--theme-muted);
+  margin-bottom:8px;
+}
+.diag-block ul{
+  margin-left:18px;
+  display:grid;
+  gap:8px;
+}
+.diag-block li{
+  color:var(--theme-text);
+  line-height:1.65;
+}
+.note{
+  margin-top:14px;
+  font-style:italic;
+  color:var(--theme-muted);
+}
+
+@media(max-width:900px){
+  .hero-panel{margin:24px;padding:24px}
+  .section{padding:24px}
+}
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="index.html" class="brand">PROCAM / SYSTEM RETENCYJNY</a>
+      <a href="index.html" class="back-link">Powrót do strony głównej</a>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div class="hero-img">
+        <img src="assets/subpage1/underwater-water-treatment-diagram.png" alt="Diagram uzdatniania wody">
+      </div>
+      <div class="hero-panel">
+        <div class="kicker">SUBPAGE_01 / RETENCJA</div>
+        <h1>Lokalny System Retencyjny</h1>
+        <p class="hero-sub">Projektowanie i realizacja rozwiązań retencyjnych dla obiektów wymagających bezpiecznego gospodarowania wodami opadowymi.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Wprowadzenie</h2>
+      <p>Efektywne zarządzanie wodami opadowymi na obiekcie, to klucz do zabezpieczenia infrastruktury przed nawalnymi wodami opadowymi. Redukacja kosztów zrzutu deszczówki do kanalizacji burzowej i budowa retencji lokalnej na obiekcie.</p>
+    </section>
+
+    <section class="section">
+      <h2>Budowa Lokalnego Systemu Retencyjnego</h2>
+
+      <div class="diag-block">
+        <div class="diag-title">Wariant A / Rozsączający</div>
+        <ul>
+          <li>opiera się na skrzynkach rozsączających, studniach chłonnych, tynelach rozsączączych i membranie zabezpieczającej przed zanieczyaszceniem gruntem</li>
+        </ul>
+      </div>
+
+      <div class="diag-block">
+        <div class="diag-title">Wariant B / Przechwytujący</div>
+        <ul>
+          <li>opiera się na pojedynczych zbiornikach retencyjnych dużej pojemności lub ich bateriach, oraz studniach rewizyjnych</li>
+        </ul>
+      </div>
+
+      <p class="note">*Geologia lokalna zawsze musi być uwzględniona.</p>
+    </section>
+
+    <section class="section">
+      <h2>Korzyści z Instalacji Systemy Retencyjnego</h2>
+      <div class="diag-block">
+        <ul>
+          <li>zabezpieczenie budynków budowli przed podtopieniami i zalaniem</li>
+          <li>niższe opłaty za zrzut wody opadowej i za ubezpieczenie nieruchomości</li>
+          <li>eliminacja budowy kolektorów deszczowych dużych średnic</li>
+          <li>odciązenie sieci kanalizacyjnej</li>
+          <li>możliwość wykorzystania wody opadowej w lokalnym procesie technologicznym</li>
+          <li>ochrona zasobów wodnych i środowiska</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Tunele rozsączające</h2>
+      <p>Rozwiązanie modułowe o wysokiej wydajności rozsączania, dedykowane dla obiektów wymagających stabilnej i skalowalnej retencji lokalnej.</p>
+    </section>
+  </main>
+</body>
+</html>
