@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PROCAM – Dystrybucja środków ochrony roślin, nasion i nawozów</title>
+<title>MABOTECH – Dystrybucja środków ochrony roślin, nasion i nawozów</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cardo:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -44,7 +44,8 @@ body{
   background-position:-1px -1px;
   overflow-x:hidden;
 }
-a{text-decoration:none;color:inherit}
+a{text-decoration:none;color:inherit;cursor:pointer}
+button,[role="button"],[role="link"],input[type="button"],input[type="submit"]{cursor:pointer}
 img{max-width:100%;display:block}
 
 /* ENGINEERING DECO */
@@ -170,7 +171,14 @@ footer{
 /* HEADER */
 header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.96);box-shadow:0 2px 8px rgba(11,63,105,.16)}
 .header-main{display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:72px}
-.logo img{height:40px}
+.logo{
+  font-family:var(--mono);
+  font-size:24px;
+  font-weight:700;
+  letter-spacing:.04em;
+  color:var(--theme-secondary);
+  text-transform:uppercase;
+}
 nav{display:flex;align-items:center;gap:4px}
 .nav-item{position:relative}
 .nav-item>a{display:flex;align-items:center;gap:4px;padding:8px 14px;font-size:13px;font-weight:600;color:var(--dark);border-radius:4px;transition:background .2s,color .2s;text-transform:uppercase;letter-spacing:.04em}
@@ -506,8 +514,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
 <header>
   <div class="header-main">
     <a href="#" class="logo">
-      <img src="https://www.procam.pl/wp-content/themes/procam/img/logo.svg" alt="PROCAM" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-      <span style="display:none;font-size:22px;font-weight:900;color:var(--green);letter-spacing:-.02em">PROCAM</span>
+      MABOTECH
     </a>
     <button class="burger" id="burgerBtn" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -533,7 +540,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
           <a href="#">Wiedza rolnicza</a>
           <a href="#">Instytut Praktycznej Agronomii</a>
           <a href="#">Katalog szkodników</a>
-          <a href="#">PROCAM GARDEN</a>
+          <a href="#">MABOTECH GARDEN</a>
         </div>
       </div>
       <div class="nav-item">
@@ -577,7 +584,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
         </div>
       </div>
       <div class="nav-item" style="margin-left:8px">
-        <a href="#" class="header-cta" style="text-transform:uppercase;letter-spacing:.04em">MojPROCAM</a>
+        <a href="#" class="header-cta" style="text-transform:uppercase;letter-spacing:.04em">MojMABOTECH</a>
       </div>
     </nav>
   </div>
@@ -692,7 +699,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
   </div>
   <div class="strip-item">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-    PROCAM SKY SYSTEM
+    MABOTECH SKY SYSTEM
   </div>
 </div>
 
@@ -739,7 +746,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
     <div class="card">
       <div class="card-body">
         <span class="card-id">ITEM_03</span>
-        <h3>MojPROCAM</h3>
+        <h3>MojMABOTECH</h3>
         <p>Zaloguj się lub załóż konto przez swojego agronomistę</p>
         <a href="#" class="card-link">Zaloguj się</a>
       </div>
@@ -748,7 +755,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
     <div class="card">
       <div class="card-body">
         <span class="card-id">ITEM_04</span>
-        <h3>Kariera w PROCAM</h3>
+        <h3>Kariera w MABOTECH</h3>
         <p>Dołącz do zespołu pasjonatów rolnictwa i agronomii</p>
         <a href="#" class="card-link">Zobacz oferty</a>
       </div>
@@ -775,7 +782,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
     <div class="card">
       <div class="card-body">
         <span class="card-id">ITEM_07</span>
-        <h3>PROCAM SKY SYSTEM</h3>
+        <h3>MABOTECH SKY SYSTEM</h3>
         <p>Nowoczesny system satelitarnego monitorowania upraw dla precyzyjnego rolnictwa</p>
         <a href="#" class="card-link">Dowiedz się więcej</a>
       </div>
@@ -798,7 +805,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
   <div class="eng-label" style="top:40px; left:80px;">[EXP_REF: 1994-2026]</div>
   <div>
     <h2>Ponad 30 lat doświadczenia w dystrybucji środków ochrony roślin</h2>
-    <p>PROCAM to jeden z liderów rynku dystrybucji środków ochrony roślin, nasion i nawozów w Polsce. Współpracujemy z wiodącymi producentami agrochemikaliów, oferując rolnikom najwyższej jakości produkty i profesjonalne doradztwo agronomiczne.</p>
+    <p>MABOTECH to jeden z liderów rynku dystrybucji środków ochrony roślin, nasion i nawozów w Polsce. Współpracujemy z wiodącymi producentami agrochemikaliów, oferując rolnikom najwyższej jakości produkty i profesjonalne doradztwo agronomiczne.</p>
   </div>
   <div class="stats">
     <div class="stat">
@@ -880,7 +887,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
 <!-- NEWS -->
 <section class="news">
   <div class="section-label">Aktualności</div>
-  <h2 class="section-title">Co nowego w PROCAM</h2>
+  <h2 class="section-title">Co nowego w MABOTECH</h2>
   <div class="news-grid">
     <div class="news-main">
       <div class="news-main-img">
@@ -909,7 +916,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
         </div>
         <div class="news-card-body">
           <div class="news-date">5 lutego 2026</div>
-          <h4>PROCAM na targach AGROTECH – zapraszamy na stoisko</h4>
+          <h4>MABOTECH na targach AGROTECH – zapraszamy na stoisko</h4>
         </div>
       </div>
       <div class="news-card">
@@ -927,7 +934,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
 
 <!-- CTA -->
 <section class="cta-banner">
-  <h2>Zacznij współpracę z PROCAM</h2>
+  <h2>Zacznij współpracę z MABOTECH</h2>
   <p>Skontaktuj się z naszym agronomistą i dowiedz się, jak możemy wspólnie podnieść efektywność Twojego gospodarstwa.</p>
   <div class="cta-btns">
     <a href="#" class="btn-primary">Skontaktuj się</a>
@@ -938,7 +945,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
 <!-- FOOTER -->
 <footer>
   <div class="footer-bottom">
-    <p>© 2026 PROCAM Polska Sp. z o.o. Wszelkie prawa zastrzeżone.</p>
+    <p>© 2026 MABOTECH Polska Sp. z o.o. Wszelkie prawa zastrzeżone.</p>
     <div class="footer-links">
       <a href="#">Polityka prywatności</a>
       <a href="#">RODO</a>
@@ -952,7 +959,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
 <div class="nav-overlay" id="navOverlay"></div>
 <aside class="nav-drawer" id="navDrawer" aria-label="Menu mobilne">
   <div class="drawer-header">
-    <span class="drawer-logo">PROCAM</span>
+    <span class="drawer-logo">MABOTECH</span>
     <button class="drawer-close" id="drawerClose" aria-label="Zamknij menu">
       <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
@@ -978,7 +985,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
         <a href="#">Wiedza rolnicza</a>
         <a href="#">Instytut Praktycznej Agronomii</a>
         <a href="#">Katalog szkodników</a>
-        <a href="#">PROCAM GARDEN</a>
+        <a href="#">MABOTECH GARDEN</a>
       </div>
     </div>
     <div class="mob-item">
@@ -1023,7 +1030,7 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
     </div>
   </nav>
   <div class="drawer-cta">
-    <a href="#">MojPROCAM – Zaloguj się</a>
+    <a href="#">MojMABOTECH – Zaloguj się</a>
   </div>
 </aside>
 
@@ -1112,6 +1119,26 @@ footer{background:var(--theme-white);color:var(--dark);border-top:2px solid var(
       }
     });
   }
+
+  // Make feature cards with a real destination clickable as a whole card.
+  document.querySelectorAll('.cards-grid .card').forEach(function(card){
+    var targetLink = card.querySelector('.card-link[href]:not([href="#"])');
+    if (!targetLink) return;
+
+    card.setAttribute('role', 'link');
+    card.setAttribute('tabindex', '0');
+
+    card.addEventListener('click', function(e){
+      if (e.target.closest('a')) return;
+      window.location.href = targetLink.href;
+    });
+
+    card.addEventListener('keydown', function(e){
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      e.preventDefault();
+      window.location.href = targetLink.href;
+    });
+  });
 })();
 </script>
 </body>

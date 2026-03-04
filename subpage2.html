@@ -36,12 +36,20 @@ a{text-decoration:none;color:inherit;cursor:pointer}
 button,[role="button"],[role="link"],input[type="button"],input[type="submit"]{cursor:pointer}
 
 .topbar{
-  border-bottom:1px solid rgba(11,63,105,.14);
-  background:rgba(255,255,255,.95);
-  position:sticky;
+  border-bottom:1px solid rgba(255,255,255,.28);
+  background:rgba(11,63,105,0);
+  position:fixed;
   top:0;
-  z-index:20;
+  left:0;
+  right:0;
+  z-index:40;
   --read-progress:0%;
+  transition:background .28s ease,border-color .28s ease,backdrop-filter .28s ease;
+}
+.topbar.scrolled{
+  background:rgba(11,63,105,.92);
+  border-bottom-color:rgba(255,255,255,.18);
+  backdrop-filter:blur(6px);
 }
 .topbar::after{
   content:'';
@@ -50,7 +58,7 @@ button,[role="button"],[role="link"],input[type="button"],input[type="submit"]{c
   bottom:-1px;
   height:2px;
   width:var(--read-progress);
-  background:var(--theme-accent-deep);
+  background:var(--theme-accent);
   pointer-events:none;
 }
 .topbar-inner{
@@ -66,7 +74,7 @@ button,[role="button"],[role="link"],input[type="button"],input[type="submit"]{c
   font-size:13px;
   letter-spacing:.12em;
   text-transform:uppercase;
-  color:var(--theme-secondary);
+  color:#fff;
 }
 .back-link{
   display:inline-flex;
@@ -75,9 +83,14 @@ button,[role="button"],[role="link"],input[type="button"],input[type="submit"]{c
   font-size:11px;
   text-transform:uppercase;
   letter-spacing:.14em;
-  color:var(--theme-secondary);
-  border:1px solid var(--theme-border);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.45);
+  background:rgba(255,255,255,.08);
   padding:10px 16px;
+  transition:background .2s ease,border-color .2s ease;
+}
+.back-link:hover{
+  background:rgba(255,255,255,.18);
 }
 
 .page{
@@ -87,52 +100,48 @@ button,[role="button"],[role="link"],input[type="button"],input[type="submit"]{c
 }
 
 .hero{
-  margin-top:24px;
-  border:1px solid var(--theme-border);
-  background:var(--theme-surface);
+  margin:0 calc(50% - 50vw) 0;
+  border:none;
+  background:var(--theme-secondary);
   position:relative;
-  min-height:560px;
+  min-height:100vh;
   overflow:hidden;
+  display:flex;
+  align-items:flex-end;
 }
 .hero::before{
   content:'';
   position:absolute;
-  right:-90px;
-  top:-80px;
-  width:420px;
-  height:420px;
-  border:1px solid var(--theme-border);
-  border-radius:50%;
-  box-shadow:0 0 0 30px rgba(11,63,105,.08),0 0 0 60px rgba(11,63,105,.04);
+  inset:0;
+  background:linear-gradient(to bottom,rgba(8,20,36,.28),rgba(8,20,36,.46) 45%,rgba(8,20,36,.64));
+  z-index:1;
 }
 .hero::after{
-  content:'';
-  position:absolute;
-  left:-8%;
-  right:-8%;
-  top:48%;
-  border-top:1px solid var(--theme-border);
-  box-shadow:0 -120px 0 0 rgba(11,63,105,.08),0 120px 0 0 rgba(11,63,105,.08);
+  content:none;
 }
 .hero-img{
   position:absolute;
-  inset:0;
+  inset:-10% 0 -10% 0;
 }
 .hero-img img{
   width:100%;
   height:100%;
   object-fit:cover;
-  opacity:.48;
-  filter:grayscale(1) contrast(1.2) brightness(.92);
+  opacity:.95;
+  filter:grayscale(.08) contrast(1.08) brightness(.88);
+  transform:translate3d(0,var(--hero-parallax,0px),0) scale(1.08);
+  transform-origin:center center;
+  will-change:transform;
 }
 .hero-panel{
   position:relative;
   z-index:2;
   width:min(760px,92%);
-  margin:56px;
+  margin:0 56px 64px;
   background:rgba(255,255,255,.86);
-  border:1px solid var(--theme-border);
+  border:1px solid rgba(255,255,255,.45);
   padding:36px;
+  box-shadow:0 18px 60px rgba(0,0,0,.25);
 }
 .kicker{
   font-family:var(--mono);
@@ -240,6 +249,97 @@ h1{
   color:var(--theme-text);
   line-height:1.65;
 }
+.section.section-showcase{
+  padding:0;
+  border:none;
+  background:transparent;
+}
+.section.section-showcase::before,
+.section.section-showcase::after{
+  content:none;
+}
+.showcase-stage{
+  position:relative;
+  min-height:500px;
+  display:flex;
+  align-items:center;
+  overflow:visible;
+}
+.middle-showcase{
+  width:min(760px,62%);
+  margin-left:auto;
+  border:1px solid var(--theme-border);
+  background:#eef2f7;
+  padding:48px 44px;
+  position:relative;
+  z-index:1;
+}
+.middle-showcase-media{
+  margin:0;
+  position:absolute;
+  left:clamp(calc(50% - 50vw), -64px, 0px);
+  top:50%;
+  transform:translateY(-50%);
+  width:clamp(540px,46vw,860px);
+  height:clamp(300px,32vw,500px);
+  z-index:2;
+  box-shadow:0 20px 45px rgba(11,63,105,.14);
+}
+.middle-showcase-media img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.middle-showcase-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:16px;
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--theme-muted);
+}
+.middle-showcase-kicker::before,
+.middle-showcase-kicker::after{
+  content:'';
+  width:26px;
+  height:1px;
+  background:rgba(11,63,105,.25);
+}
+.middle-showcase h2{
+  margin:0 0 16px;
+  font-size:clamp(26px,3vw,40px);
+}
+.middle-showcase p{
+  margin:0;
+  color:var(--theme-muted);
+}
+.middle-showcase-list{
+  margin:18px 0 0;
+  padding:0;
+  list-style:none;
+  display:grid;
+  gap:10px;
+}
+.middle-showcase-list li{
+  position:relative;
+  padding-left:18px;
+  color:var(--theme-text);
+  line-height:1.6;
+}
+.middle-showcase-list li::before{
+  content:'';
+  position:absolute;
+  left:0;
+  top:.6em;
+  width:7px;
+  height:7px;
+  border:1px solid rgba(11,63,105,.42);
+  background:rgba(102,180,231,.18);
+}
 .note{
   margin-top:14px;
   font-style:italic;
@@ -247,8 +347,29 @@ h1{
 }
 
 @media(max-width:900px){
-  .hero-panel{margin:24px;padding:24px}
+  .hero{min-height:85vh}
+  .hero-panel{margin:0 24px 32px;padding:24px}
   .section{padding:24px}
+  .section.section-showcase{padding:0}
+  .showcase-stage{
+    min-height:0;
+    display:block;
+  }
+  .middle-showcase{
+    width:100%;
+    padding:24px 18px;
+  }
+  .middle-showcase-media{
+    position:static;
+    transform:none;
+    width:100%;
+    height:auto;
+    margin:0 0 16px;
+    box-shadow:none;
+  }
+  .middle-showcase-media img{
+    max-height:250px;
+  }
 }
 </style>
 </head>
@@ -263,10 +384,10 @@ h1{
   <main class="page">
     <section class="hero">
       <div class="hero-img">
-        <img src="assets/subpage1/underwater-water-treatment-diagram.png" alt="Diagram uzdatniania wody">
+        <img src="assets/subpage2/hero-ep-projekt.png" alt="Rozsączanie wód opadowych">
       </div>
       <div class="hero-panel">
-        <div class="kicker">SUBPAGE_01 / RETENCJA</div>
+        <div class="kicker">SUBPAGE_02 / RETENCJA</div>
         <h1>Lokalny System Retencyjny</h1>
         <p class="hero-sub">Projektowanie i realizacja rozwiązań retencyjnych dla obiektów wymagających bezpiecznego gospodarowania wodami opadowymi.</p>
       </div>
@@ -297,17 +418,22 @@ h1{
       <p class="note">*Geologia lokalna zawsze musi być uwzględniona.</p>
     </section>
 
-    <section class="section">
-      <h2>Korzyści z Instalacji Systemy Retencyjnego</h2>
-      <div class="diag-block">
-        <ul>
-          <li>zabezpieczenie budynków budowli przed podtopieniami i zalaniem</li>
-          <li>niższe opłaty za zrzut wody opadowej i za ubezpieczenie nieruchomości</li>
-          <li>eliminacja budowy kolektorów deszczowych dużych średnic</li>
-          <li>odciązenie sieci kanalizacyjnej</li>
-          <li>możliwość wykorzystania wody opadowej w lokalnym procesie technologicznym</li>
-          <li>ochrona zasobów wodnych i środowiska</li>
-        </ul>
+    <section class="section section-showcase" aria-labelledby="benefits-title">
+      <div class="showcase-stage">
+        <figure class="middle-showcase-media">
+          <img src="assets/subpage1/underwater-water-treatment-diagram.png" alt="Schemat retencji i uzdatniania wody">
+        </figure>
+        <div class="middle-showcase">
+          <span class="middle-showcase-kicker">Korzyści / System retencyjny</span>
+          <h2 id="benefits-title">Korzyści z instalacji systemu retencyjnego</h2>
+          <p>Lokalna retencja chroni obiekt podczas intensywnych opadów i obniża koszty utrzymania infrastruktury deszczowej.</p>
+          <ul class="middle-showcase-list">
+            <li>Zabezpieczenie budynków i budowli przed podtopieniami.</li>
+            <li>Niższe opłaty za zrzut deszczówki oraz ubezpieczenie obiektu.</li>
+            <li>Odciążenie lokalnej sieci kanalizacyjnej.</li>
+            <li>Możliwość wykorzystania deszczówki w procesie technologicznym.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -319,18 +445,42 @@ h1{
   <script>
     (function () {
       const topbar = document.querySelector('.topbar');
+      const heroImage = document.querySelector('.hero-img img');
+      const heroSection = document.querySelector('.hero');
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
       if (!topbar) return;
 
-      const updateReadProgress = () => {
+      const updateLayoutEffects = () => {
         const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
         const progress = maxScroll <= 0 ? 100 : (window.scrollY / maxScroll) * 100;
         const clamped = Math.min(100, Math.max(0, progress));
         topbar.style.setProperty('--read-progress', clamped + '%');
+
+        topbar.classList.toggle('scrolled', window.scrollY > 24);
+
+        if (heroImage && heroSection && !prefersReducedMotion.matches) {
+          const heroRect = heroSection.getBoundingClientRect();
+          const scrolledInsideHero = Math.min(Math.max(-heroRect.top, 0), heroSection.offsetHeight);
+          const parallaxShift = Math.min(scrolledInsideHero * 0.34, 140);
+          heroImage.style.setProperty('--hero-parallax', Math.round(parallaxShift) + 'px');
+        } else if (heroImage) {
+          heroImage.style.setProperty('--hero-parallax', '0px');
+        }
       };
 
-      window.addEventListener('scroll', updateReadProgress, { passive: true });
-      window.addEventListener('resize', updateReadProgress);
-      updateReadProgress();
+      let ticking = false;
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(() => {
+          updateLayoutEffects();
+          ticking = false;
+        });
+      };
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', updateLayoutEffects);
+      updateLayoutEffects();
     })();
   </script>
 </body>
