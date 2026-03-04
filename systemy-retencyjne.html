@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>System Retencyjny - MABOTECH</title>
+  <title>Systemy Retencyjne - MABOTECH</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -307,6 +307,43 @@
 
     .module p + p { margin-top: var(--paragraph-gap); }
 
+    .module-media {
+      margin: 24px 0 0;
+      border: 1px solid #cfdae5;
+      border-radius: 10px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #f9fbfd 0%, #f2f6fa 100%);
+      box-shadow: 0 12px 28px rgba(9, 25, 41, 0.08);
+    }
+
+    .module-media img {
+      width: 100%;
+      height: auto;
+      max-height: min(62vh, 420px);
+      object-fit: contain;
+      background: #eaf1f8;
+    }
+
+    .module-media .caption {
+      margin: 0;
+      padding: 12px 16px 14px;
+      border-top: 1px solid #d8e3ee;
+      background: #ffffff;
+    }
+
+    .module-full-media .module-media {
+      margin: 24px -28px -28px;
+      border-left: 0;
+      border-right: 0;
+      border-bottom: 0;
+      border-radius: 0 0 10px 10px;
+      box-shadow: none;
+    }
+
+    .module-full-media .module-media .caption {
+      padding-inline: 28px;
+    }
+
     .bullet-block,
     .side-note {
       background: var(--soft);
@@ -481,25 +518,99 @@
       background: linear-gradient(180deg, #f7fafd 0%, #f1f6fb 100%);
     }
 
-    .break-inner {
-      max-width: 1320px;
-      margin: 0 auto;
-      border: 1px solid #c7d6e6;
-      border-radius: 10px;
-      padding: 30px;
+    .break-hero {
+      margin: 0;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      height: clamp(270px, 36vw, 470px);
       display: grid;
-      gap: 18px;
-      box-shadow: 0 12px 30px rgba(13, 39, 66, 0.09);
+      place-items: center;
+      background:
+        radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0) 42%),
+        radial-gradient(circle at 82% 74%, rgba(226, 239, 252, 0.52), rgba(226, 239, 252, 0) 46%),
+        linear-gradient(180deg, #ebf2f8 0%, #dde8f2 100%);
     }
 
-    .break-inner h3 {
+    .break-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(73, 103, 131, 0.14) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(73, 103, 131, 0.14) 1px, transparent 1px);
+      background-size: 30px 30px;
+      opacity: 0.38;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .break-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(9, 27, 44, 0.12), rgba(9, 27, 44, 0.55));
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .break-hero img {
+      width: auto;
+      height: auto;
+      max-width: min(92%, 980px);
+      max-height: calc(100% - 28px);
+      object-fit: contain;
+      object-position: center center;
+      background: transparent;
+      position: relative;
+      z-index: 2;
+      filter: drop-shadow(0 10px 16px rgba(8, 24, 42, 0.16)) saturate(0.92) contrast(1.03);
+    }
+
+    .break-hero-label {
+      position: absolute;
+      left: 22px;
+      bottom: 20px;
+      z-index: 3;
+      margin: 0;
+      padding: 8px 12px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      color: #ffffff;
+      background: rgba(8, 25, 41, 0.42);
+      border: 1px solid rgba(198, 217, 236, 0.68);
+      text-transform: uppercase;
+    }
+
+    .break-inner {
+      max-width: min(1320px, 88%);
+      margin: 0 auto;
+      padding: 0;
+      display: grid;
+      gap: 0;
+      border: 1px solid #c7d6e6;
+      border-radius: 12px;
+      box-shadow: 0 12px 28px rgba(13, 39, 66, 0.1);
+      overflow: hidden;
+    }
+
+    .break-copy {
+      display: grid;
+      gap: 18px;
+      padding: 30px;
+      border-top: 1px solid #d6e2ee;
+      background: #ffffff;
+    }
+
+    .break-copy h3 {
       margin: 0;
       font-size: clamp(36px, 4.8vw, 54px);
       line-height: 1;
       text-transform: uppercase;
     }
 
-    .break-inner p {
+    .break-copy p {
       margin: 0;
       color: #34475a;
       font-size: 18px;
@@ -598,13 +709,19 @@
       .module-title { font-size: 28px; }
       .hero h1 { font-size: clamp(44px, 13vw, 68px); }
       .tag { font-size: 13px; }
+      .break-hero {
+        height: clamp(230px, 62vw, 420px);
+      }
+      .break-hero-label { font-size: 11px; left: 16px; bottom: 14px; }
+      .break-copy { padding: 24px; }
+      .break-inner { max-width: 100%; }
     }
   </style>
 </head>
 <body>
   <header class="topbar">
     <div class="topbar-inner">
-      <a class="brand" href="index.html">MABOTECH / SYSTEM RETENCYJNY</a>
+      <a class="brand" href="index.html">MABOTECH / SYSTEMY RETENCYJNE</a>
       <div class="read-panel">
         <a class="back-link" href="index.html">Powrót do strony głównej</a>
       </div>
@@ -662,9 +779,13 @@
             <p>Rozwiązanie działa nawet przy ograniczonej <span class="term" tabindex="0" data-tooltip="Infiltracja to wsiąkanie wody do gruntu przez jego warstwy filtracyjne.">infiltracji</span> gruntu i stabilizuje odpływ do sieci.</p>
           </article>
 
-          <article class="module fade-item">
+          <article class="module module-full-media fade-item">
             <h3 class="module-title">Skrzynki Rozsączające</h3>
             <p>Skrzynki retencyjne przechwytują nadmiar wody podczas opadu, a następnie oddają ją do podłoża, gdy wzrasta chłonność gruntu. Modułowa konstrukcja pozwala skalować system bez zmiany logiki pracy całej instalacji.</p>
+            <figure class="module-media" aria-label="Skrzynki rozsączające">
+              <img src="assets/sokaway-crates.png" alt="Skrzynki rozsączające w układzie modułowym">
+              <figcaption class="caption">Rysunek 02A. Modułowa bateria skrzynek rozsączających do retencji i rozsączania wód opadowych.</figcaption>
+            </figure>
           </article>
 
           <div class="bullet-block fade-item" aria-label="Kluczowe cechy systemu">
@@ -779,9 +900,15 @@
 
   <section class="break-section fade-item" aria-label="Przechwytujący system retencyjny">
     <div class="break-inner">
-      <h3>Przechwytujący System Retencyjny</h3>
-      <p>Buforuje duże przepływy, przechwytuje falę nawalną i oddaje wodę do kanalizacji po napełnieniu zbiornika.</p>
-      <p>Możliwość łączenia zbiorników w baterie bez limitu pojemności.</p>
+      <figure class="break-hero" aria-label="Wizualizacja przechwytującego systemu retencyjnego">
+        <img src="assets/retention-system.png" alt="Przechwytujący system retencyjny z dużą pojemnością buforową">
+        <figcaption class="break-hero-label">Przechwyt · Retencja · Buforowanie</figcaption>
+      </figure>
+      <div class="break-copy">
+        <h3>Przechwytujący System Retencyjny</h3>
+        <p>Buforuje duże przepływy, przechwytuje falę nawalną i oddaje wodę do kanalizacji po napełnieniu zbiornika.</p>
+        <p>Możliwość łączenia zbiorników w baterie bez limitu pojemności.</p>
+      </div>
     </div>
   </section>
 
