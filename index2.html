@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Systemy Zagospodarowania Wód Opadowych - MABOTECH</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --ink: #1f2933;
+      --muted: #5f6b76;
+      --line: #d9e0e6;
+      --soft: #f2f5f8;
+      --accent: #0057b8;
+      --card-shadow: 0 16px 34px rgba(16, 36, 56, 0.08);
+      --section-gap: clamp(72px, 8vw, 112px);
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Barlow", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-image:
+        linear-gradient(rgba(73, 103, 131, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(73, 103, 131, 0.07) 1px, transparent 1px);
+      background-size: 42px 42px;
+      background-attachment: fixed;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1320px, 100% - 48px);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(6px);
+      --read-progress: 0%;
+      transition: border-color 0.28s ease, background 0.28s ease;
+    }
+
+    .topbar::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      height: 2px;
+      width: var(--read-progress);
+      background: linear-gradient(90deg, #2472d0, #0057b8);
+      transition: width 0.14s linear;
+    }
+
+    .topbar.scrolled { border-bottom-color: #c6d2de; }
+
+    .topbar-inner {
+      width: min(1320px, 100% - 48px);
+      margin: 0 auto;
+      padding: 14px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px 24px;
+      flex-wrap: wrap;
+    }
+
+    .brand,
+    .nav-link,
+    .nav-cta,
+    .kicker,
+    .section-label,
+    .node,
+    .card-link,
+    .step-index,
+    .footer-meta {
+      font-family: "IBM Plex Mono", monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand {
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .top-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav-link,
+    .nav-cta {
+      border: 1px solid #aebccc;
+      padding: 10px 14px;
+      font-size: 12px;
+      transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+      background: #ffffff;
+    }
+
+    .nav-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .nav-cta {
+      border-color: var(--accent);
+      background: #edf4fc;
+      color: #0f3355;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    main section {
+      margin: var(--section-gap) 0;
+    }
+
+    .hero {
+      min-height: min(78vh, 760px);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(242, 247, 252, 0.74));
+      padding: clamp(48px, 9vw, 120px) clamp(20px, 5vw, 80px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      background: rgba(0, 87, 184, 0.1);
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 1px;
+      top: 0;
+      bottom: 0;
+      left: 12%;
+    }
+
+    .hero::after {
+      height: 1px;
+      left: 0;
+      right: 0;
+      top: 18%;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .kicker {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0 0 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(38px, 6vw, 72px);
+      line-height: 0.98;
+      text-transform: uppercase;
+      letter-spacing: 0.015em;
+    }
+
+    .hero p {
+      margin: 26px auto 34px;
+      color: #34475a;
+      font-size: clamp(20px, 2.1vw, 28px);
+      max-width: 760px;
+      line-height: 1.35;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: #ffffff;
+      padding: 13px 20px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+    }
+
+    .btn:hover {
+      background: #2a76ce;
+      border-color: #2a76ce;
+      transform: translateY(-2px);
+    }
+
+    .section-head {
+      margin-bottom: 34px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .section-label {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: clamp(34px, 4.2vw, 52px);
+      line-height: 1.03;
+      text-transform: uppercase;
+    }
+
+    .section-line {
+      height: 1px;
+      flex: 1;
+      min-width: 120px;
+      background: var(--line);
+    }
+
+    .diagram-shell {
+      border: 1px solid var(--line);
+      background: #ffffff;
+      box-shadow: var(--card-shadow);
+      padding: clamp(26px, 4vw, 50px);
+      position: relative;
+      min-height: clamp(460px, 66vw, 640px);
+      overflow: hidden;
+    }
+
+    .diagram-shell::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px dashed rgba(0, 87, 184, 0.23);
+      pointer-events: none;
+    }
+
+    .diagram-shell .connector {
+      position: absolute;
+      background: rgba(0, 87, 184, 0.42);
+      pointer-events: none;
+    }
+
+    .connector.v-main {
+      width: 1px;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 145px;
+      height: 300px;
+    }
+
+    .connector.h-main {
+      height: 1px;
+      top: 236px;
+      left: 22%;
+      right: 22%;
+    }
+
+    .connector.v-left,
+    .connector.v-right {
+      width: 1px;
+      top: 236px;
+      height: 88px;
+    }
+
+    .connector.v-left { left: 26%; }
+    .connector.v-right { right: 26%; }
+
+    .connector.h-mid {
+      height: 1px;
+      top: 323px;
+      left: 26%;
+      right: 26%;
+    }
+
+    .connector.v-low {
+      width: 1px;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 324px;
+      height: 132px;
+    }
+
+    .connector.v-separator {
+      width: 1px;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 456px;
+      height: 98px;
+    }
+
+    .diagram-node {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      border: 1px solid #a8bfd8;
+      background: #f8fbff;
+      padding: 12px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    a.diagram-node:hover {
+      border-color: var(--accent);
+      background: #edf4fc;
+      transform: translate(-50%, -50%) translateY(-2px);
+    }
+
+    .node-center {
+      left: 50%;
+      top: 96px;
+      background: #0d3f6c;
+      border-color: #0d3f6c;
+      color: #ffffff;
+    }
+
+    .node-left { left: 26%; top: 236px; }
+    .node-right { left: 74%; top: 236px; }
+    .node-bottom { left: 50%; top: 364px; }
+    .node-end { left: 50%; top: 556px; }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .sys-card {
+      background: #ffffff;
+      padding: 28px;
+      display: grid;
+      gap: 16px;
+      min-height: 320px;
+      transition: background 0.25s ease;
+    }
+
+    .sys-card:hover { background: #f9fbfe; }
+
+    .sys-card h3 {
+      margin: 0;
+      font-size: 25px;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .sys-card p {
+      margin: 0;
+      color: #34475a;
+      font-size: 19px;
+      line-height: 1.4;
+    }
+
+    .diagram-placeholder {
+      border: 1px solid #bfd0e0;
+      background: linear-gradient(180deg, #f7fbff, #edf4fb);
+      min-height: 96px;
+      display: grid;
+      place-items: center;
+      padding: 8px;
+    }
+
+    .card-link {
+      margin-top: auto;
+      font-size: 12px;
+      color: var(--accent);
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      width: fit-content;
+    }
+
+    .card-link::before { content: "→"; }
+
+    .steps {
+      border: 1px solid var(--line);
+      background: #ffffff;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .steps::before {
+      content: "";
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      top: 78px;
+      height: 1px;
+      background: rgba(0, 87, 184, 0.34);
+      pointer-events: none;
+    }
+
+    .step {
+      padding: 28px;
+      border-right: 1px solid var(--line);
+      display: grid;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+      background: #ffffff;
+    }
+
+    .step:last-child { border-right: 0; }
+
+    .step-icon {
+      width: 42px;
+      height: 42px;
+      border: 1px solid #8eaccb;
+      border-radius: 50%;
+      position: relative;
+      background: #edf4fc;
+    }
+
+    .step-icon::before,
+    .step-icon::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      background: #4e7cad;
+      transform: translate(-50%, -50%);
+    }
+
+    .step-icon::before { width: 18px; height: 1px; }
+    .step-icon::after { width: 1px; height: 18px; }
+
+    .step-index {
+      color: var(--muted);
+      font-size: 12px;
+      margin: 0;
+    }
+
+    .step h3 {
+      margin: 0;
+      font-size: 24px;
+      text-transform: uppercase;
+      line-height: 1.08;
+    }
+
+    .step p {
+      margin: 0;
+      color: #34475a;
+      font-size: 18px;
+      line-height: 1.45;
+    }
+
+    .featured {
+      border: 1px solid var(--line);
+      background: #ffffff;
+      box-shadow: var(--card-shadow);
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      overflow: hidden;
+    }
+
+    .featured-media {
+      border-right: 1px solid var(--line);
+      background: linear-gradient(180deg, #f7fbff, #e8f2fb);
+      min-height: 360px;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+    }
+
+    .featured-media img {
+      width: min(92%, 610px);
+      max-height: 340px;
+      object-fit: contain;
+      filter: saturate(0.92) contrast(1.03);
+    }
+
+    .featured-copy {
+      padding: clamp(24px, 4vw, 44px);
+      display: grid;
+      align-content: center;
+      gap: 16px;
+    }
+
+    .featured-copy h3 {
+      margin: 0;
+      font-size: clamp(34px, 4vw, 50px);
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .featured-copy p {
+      margin: 0;
+      color: #34475a;
+      font-size: 20px;
+      line-height: 1.45;
+      max-width: 40ch;
+    }
+
+    .contact-cta {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #f8fbff 0%, #edf4fb 100%);
+      text-align: center;
+      padding: clamp(42px, 7vw, 86px) 20px;
+    }
+
+    .contact-cta h2 {
+      margin: 0 0 20px;
+      font-size: clamp(36px, 4.3vw, 58px);
+      text-transform: uppercase;
+      line-height: 1.02;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 0 44px;
+    }
+
+    .footer-meta {
+      margin: 0;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .fade-item {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+      will-change: opacity, transform;
+    }
+
+    .fade-item.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1080px) {
+      .cards-grid,
+      .steps,
+      .featured {
+        grid-template-columns: 1fr;
+      }
+
+      .featured-media {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .steps::before {
+        display: none;
+      }
+
+      .step {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .step:last-child { border-bottom: 0; }
+    }
+
+    @media (max-width: 900px) {
+      .container,
+      .topbar-inner {
+        width: min(1320px, 100% - 32px);
+      }
+
+      .diagram-shell {
+        min-height: 700px;
+      }
+
+      .node-left { left: 22%; }
+      .node-right { left: 78%; }
+
+      .connector.h-main { left: 22%; right: 22%; }
+      .connector.v-left { left: 22%; }
+      .connector.v-right { right: 22%; }
+      .connector.h-mid { left: 22%; right: 22%; }
+    }
+
+    @media (max-width: 720px) {
+      .topbar-inner {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .top-nav {
+        justify-content: space-between;
+      }
+
+      .nav-link,
+      .nav-cta {
+        flex: 1;
+        text-align: center;
+      }
+
+      .hero {
+        min-height: 70vh;
+      }
+
+      .diagram-shell {
+        min-height: 760px;
+        padding: 22px 16px;
+      }
+
+      .diagram-node {
+        padding: 10px 12px;
+        font-size: 11px;
+      }
+
+      .node-left { left: 20%; }
+      .node-right { left: 80%; }
+
+      .connector.h-main { left: 20%; right: 20%; }
+      .connector.v-left { left: 20%; }
+      .connector.v-right { right: 20%; }
+      .connector.h-mid { left: 20%; right: 20%; }
+    }
+
+    @media (max-width: 560px) {
+      .diagram-shell {
+        min-height: 820px;
+      }
+
+      .node-left,
+      .node-right,
+      .node-bottom,
+      .node-end,
+      .node-center {
+        left: 50%;
+      }
+
+      .node-center { top: 88px; }
+      .node-left { top: 220px; }
+      .node-right { top: 316px; }
+      .node-bottom { top: 438px; }
+      .node-end { top: 612px; }
+
+      .connector.v-main {
+        top: 126px;
+        height: 468px;
+      }
+
+      .connector.h-main,
+      .connector.v-left,
+      .connector.v-right,
+      .connector.h-mid,
+      .connector.v-low {
+        display: none;
+      }
+
+      .connector.v-separator {
+        top: 495px;
+        height: 116px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index2.html">MABOTECH / SYSTEMY ODWODNIEŃ</a>
+      <nav class="top-nav" aria-label="Główna nawigacja">
+        <a class="nav-link" href="#system-diagram">Systemy</a>
+        <a class="nav-link" href="#featured-article">Artykuły</a>
+        <a class="nav-cta" href="#contact">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero fade-item" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <p class="kicker">Mapa Rozwiązań Inżynieryjnych</p>
+        <h1 id="hero-title">SYSTEMY ZAGOSPODAROWANIA WÓD OPADOWYCH</h1>
+        <p>Nowoczesne rozwiązania retencji, infiltracji i zarządzania wodą.</p>
+        <a class="btn" href="#system-diagram">Zobacz systemy</a>
+      </div>
+    </section>
+
+    <section id="system-diagram" class="fade-item" aria-labelledby="diagram-title">
+      <div class="section-head">
+        <p class="section-label">Sekcja 02</p>
+        <h2 class="section-title" id="diagram-title">System Diagram</h2>
+        <span class="section-line" aria-hidden="true"></span>
+      </div>
+      <div class="diagram-shell" aria-label="Mapa systemów retencji i infiltracji">
+        <span class="connector v-main" aria-hidden="true"></span>
+        <span class="connector h-main" aria-hidden="true"></span>
+        <span class="connector v-left" aria-hidden="true"></span>
+        <span class="connector v-right" aria-hidden="true"></span>
+        <span class="connector h-mid" aria-hidden="true"></span>
+        <span class="connector v-low" aria-hidden="true"></span>
+        <span class="connector v-separator" aria-hidden="true"></span>
+
+        <div class="diagram-node node-center" role="status" aria-label="Węzeł główny">Retencja</div>
+        <a class="diagram-node node node-left" href="systemy-retencyjne.html">Systemy retencyjne</a>
+        <a class="diagram-node node node-right" href="subpage2.html">Tunele rozsączające</a>
+        <a class="diagram-node node node-bottom" href="subpage1.html">Studnie chłonne</a>
+        <a class="diagram-node node node-end" href="systemy-retencyjne.html#benefits">Separatory</a>
+      </div>
+    </section>
+
+    <section id="systems-cards" class="fade-item" aria-labelledby="cards-title">
+      <div class="section-head">
+        <p class="section-label">Sekcja 03</p>
+        <h2 class="section-title" id="cards-title">Systemy</h2>
+        <span class="section-line" aria-hidden="true"></span>
+      </div>
+
+      <div class="cards-grid">
+        <article class="sys-card">
+          <h3>Systemy retencyjne</h3>
+          <p>Magazynowanie wody opadowej i kontrola szczytowych przepływów.</p>
+          <div class="diagram-placeholder" aria-hidden="true">
+            <svg width="100%" height="72" viewBox="0 0 240 72" fill="none" stroke="#4f7ea8" stroke-width="1">
+              <rect x="18" y="14" width="204" height="44" />
+              <path d="M18 36H222" stroke-dasharray="4 4" />
+              <path d="M74 14V58M166 14V58" />
+            </svg>
+          </div>
+          <a class="card-link" href="systemy-retencyjne.html">Zobacz system</a>
+        </article>
+
+        <article class="sys-card">
+          <h3>Systemy rozsączające</h3>
+          <p>Infiltracja wody do gruntu przy zachowaniu stabilności systemu.</p>
+          <div class="diagram-placeholder" aria-hidden="true">
+            <svg width="100%" height="72" viewBox="0 0 240 72" fill="none" stroke="#4f7ea8" stroke-width="1">
+              <path d="M14 20H226" />
+              <rect x="34" y="28" width="172" height="24" stroke-dasharray="3 3" />
+              <path d="M34 58L48 68M62 58L76 68M90 58L104 68M118 58L132 68M146 58L160 68M174 58L188 68" />
+            </svg>
+          </div>
+          <a class="card-link" href="subpage2.html">Zobacz system</a>
+        </article>
+
+        <article class="sys-card">
+          <h3>Studnie chłonne</h3>
+          <p>Rozwiązania dla odwodnień punktowych i lokalnych zastoisk wody.</p>
+          <div class="diagram-placeholder" aria-hidden="true">
+            <svg width="100%" height="72" viewBox="0 0 240 72" fill="none" stroke="#4f7ea8" stroke-width="1">
+              <circle cx="120" cy="36" r="22" />
+              <path d="M120 14V58M98 36H142" stroke-dasharray="3 3" />
+              <path d="M84 62H156" />
+            </svg>
+          </div>
+          <a class="card-link" href="subpage1.html">Zobacz system</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="fade-item" aria-labelledby="steps-title">
+      <div class="section-head">
+        <p class="section-label">Sekcja 04</p>
+        <h2 class="section-title" id="steps-title">Jak Działa System</h2>
+        <span class="section-line" aria-hidden="true"></span>
+      </div>
+
+      <div class="steps">
+        <article class="step">
+          <div class="step-icon" aria-hidden="true"></div>
+          <p class="step-index">[1]</p>
+          <h3>Zbieranie wody</h3>
+          <p>Woda opadowa zbierana jest z dachów i powierzchni utwardzonych przez wpusty oraz kolektory.</p>
+        </article>
+        <article class="step">
+          <div class="step-icon" aria-hidden="true"></div>
+          <p class="step-index">[2]</p>
+          <h3>Retencja</h3>
+          <p>Przepływ jest buforowany w zbiornikach i modułach retencyjnych, co stabilizuje odpływ podczas nawałnic.</p>
+        </article>
+        <article class="step">
+          <div class="step-icon" aria-hidden="true"></div>
+          <p class="step-index">[3]</p>
+          <h3>Infiltracja</h3>
+          <p>Po ustaniu opadu woda stopniowo infiltruje do gruntu lub jest kierowana do dalszego wykorzystania.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="featured-article" class="fade-item" aria-labelledby="featured-title">
+      <div class="section-head">
+        <p class="section-label">Sekcja 05</p>
+        <h2 class="section-title" id="featured-title">Wyróżniony Artykuł</h2>
+        <span class="section-line" aria-hidden="true"></span>
+      </div>
+
+      <article class="featured">
+        <figure class="featured-media">
+          <img src="assets/retention-system.png" alt="Diagram systemu retencyjnego">
+        </figure>
+        <div class="featured-copy">
+          <h3>Systemy retencyjne</h3>
+          <p>Techniczne rozwiązania do magazynowania i zarządzania wodą opadową w infrastrukturze przemysłowej i miejskiej.</p>
+          <a class="card-link" href="systemy-retencyjne.html">Czytaj artykuł</a>
+        </div>
+      </article>
+    </section>
+
+    <section id="contact" class="contact-cta fade-item" aria-labelledby="contact-title">
+      <h2 id="contact-title">Skontaktuj się z nami</h2>
+      <a class="btn" href="mailto:kontakt@mabotech.pl">Kontakt</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p class="footer-meta">© 2026 MABOTECH / Systemy retencji i infiltracji</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const topbar = document.querySelector('.topbar');
+      const fadeItems = document.querySelectorAll('.fade-item');
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      const updateLayoutEffects = () => {
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = maxScroll <= 0 ? 100 : (window.scrollY / maxScroll) * 100;
+        const clamped = Math.min(100, Math.max(0, progress));
+
+        if (topbar) {
+          topbar.style.setProperty('--read-progress', clamped + '%');
+          topbar.classList.toggle('scrolled', window.scrollY > 24);
+        }
+      };
+
+      if (prefersReducedMotion.matches) {
+        fadeItems.forEach((item) => item.classList.add('is-visible'));
+      } else {
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          });
+        }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+
+        fadeItems.forEach((item) => observer.observe(item));
+      }
+
+      let ticking = false;
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(() => {
+          updateLayoutEffects();
+          ticking = false;
+        });
+      };
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', updateLayoutEffects);
+      updateLayoutEffects();
+    })();
+  </script>
+</body>
+</html>

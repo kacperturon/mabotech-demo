@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MABOTECH - Technical Manuscript v4</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --ink: #0f172a;
+      --accent: #0057b8;
+      --muted: #64748b;
+      --line: #e2e8f0;
+      --mono: "IBM Plex Mono", monospace;
+      --sans: "Barlow", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--ink); line-height: 1.5; overflow-x: hidden; }
+
+    /* SPLIT LAYOUT */
+    .split-container { display: flex; min-height: 100vh; }
+
+    /* VIEWPORT (LEFT) */
+    .viewport {
+      width: 50%;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      background: #f1f5f9;
+      overflow: hidden;
+      border-right: 1px solid var(--line);
+    }
+
+    .viewport-overlay {
+      position: absolute;
+      inset: 40px;
+      border: 1px solid rgba(15, 23, 42, 0.1);
+      z-index: 10;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+    }
+
+    .viewfinder-cross {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 40px; height: 40px;
+      transform: translate(-50%, -50%);
+    }
+    .viewfinder-cross::before, .viewfinder-cross::after {
+      content: ""; position: absolute; background: var(--accent);
+    }
+    .viewfinder-cross::before { top: 50%; left: 0; width: 100%; height: 1px; }
+    .viewfinder-cross::after { left: 50%; top: 0; width: 1px; height: 100%; }
+
+    .asset-container {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .asset-container img {
+      max-width: 80%;
+      max-height: 80%;
+      object-fit: contain;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1));
+    }
+
+    /* DOCUMENTATION (RIGHT) */
+    .documentation { width: 50%; padding: 0 80px; }
+
+    .doc-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 100px 0;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+
+    .section-meta {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-meta::before { content: ""; width: 40px; height: 1px; background: var(--accent); }
+
+    .doc-section h2 {
+      font-size: 64px;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 32px;
+      font-weight: 700;
+    }
+
+    .doc-section p {
+      font-size: 20px;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 40px;
+    }
+
+    .spec-table {
+      font-family: var(--mono);
+      font-size: 13px;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .spec-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .spec-val { color: var(--accent); font-weight: 600; }
+
+    /* CTA BUTTON */
+    .btn-action {
+      font-family: var(--mono);
+      text-transform: uppercase;
+      padding: 20px 40px;
+      background: var(--ink);
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      transition: all 0.3s;
+      text-decoration: none;
+      margin-top: 20px;
+    }
+    .btn-action:hover { background: var(--accent); transform: translateY(-4px); }
+
+    /* NAVIGATION LOG */
+    .nav-log {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      font-family: var(--mono);
+      font-size: 10px;
+      text-align: right;
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    @media (max-width: 1024px) {
+      .split-container { flex-direction: column; }
+      .viewport { width: 100%; height: 50vh; }
+      .documentation { width: 100%; padding: 0 40px; }
+      .doc-section { min-height: auto; padding: 60px 0; }
+      .doc-section h2 { font-size: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav-log">
+    LOG_SERIAL: MB-2026-X<br>
+    COORDS: <span id="coords">54.37, 18.63</span><br>
+    STATUS: SCANNING_ASSETS
+  </div>
+
+  <div class="split-container">
+    <aside class="viewport">
+      <div class="viewport-overlay">
+        <div style="display: flex; justify-content: space-between;">
+          <span style="font-family: var(--mono); font-size: 10px;">[ SENSOR_01: ACTIVE ]</span>
+          <span style="font-family: var(--mono); font-size: 10px;">REC ●</span>
+        </div>
+        <div class="viewfinder-cross"></div>
+        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+          <span style="font-family: var(--mono); font-size: 10px;">Z: 1.4x</span>
+          <span style="font-family: var(--mono); font-size: 10px;">ISO: 400</span>
+        </div>
+      </div>
+      <div class="asset-container" id="assetContainer">
+        <img src="assets/subpage2/hero-ep-projekt.png" alt="Hydro Infrastructure" id="viewportImg">
+      </div>
+    </aside>
+
+    <main class="documentation">
+      <section class="doc-section" id="intro" data-img="assets/subpage2/hero-ep-projekt.png">
+        <div class="section-meta">01 // Primary Objective</div>
+        <h2>Engineering Water Flow</h2>
+        <p>Mabotech dostarcza zaawansowane rozwiązania w zakresie retencji i rozsączania wód opadowych na obiektach przemysłowych.</p>
+        <div class="spec-table">
+          <div class="spec-row"><span>SYSTEM_ID</span> <span class="spec-val">HYDRO_CORE_V1</span></div>
+          <div class="spec-row"><span>LOAD_CAP</span> <span class="spec-val">SLW 60 (HEAVY)</span></div>
+        </div>
+      </section>
+
+      <section class="doc-section" id="modules" data-img="assets/sokaway-crates.png">
+        <div class="section-meta">02 // Modular Units</div>
+        <h2>Skrzynki Retencyjne</h2>
+        <p>Baterie skrzynek modułowych pozwalają na precyzyjne skalowanie pojemności retencyjnej zależnie od bilansu wód opadowych.</p>
+        <div class="spec-table">
+          <div class="spec-row"><span>MATERIAL</span> <span class="spec-val">POLYPROPYLENE (PP)</span></div>
+          <div class="spec-row"><span>SCALABILITY</span> <span class="spec-val">INFINITE_ARRAY</span></div>
+        </div>
+      </section>
+
+      <section class="doc-section" id="schematics" data-img="assets/subpage1/underwater-water-treatment-diagram.png">
+        <div class="section-meta">03 // Flow Analysis</div>
+        <h2>Dynamika Przebiegu</h2>
+        <p>Analiza przepływów przez systemy rozsączające zapewnia bezpieczeństwo obiektu podczas deszczy nawalnych.</p>
+        <div class="spec-table">
+          <div class="spec-row"><span>FLOW_RATE</span> <span class="spec-val">ADAPTIVE</span></div>
+          <div class="spec-row"><span>RESPONSE</span> <span class="spec-val">REAL_TIME_BUFFER</span></div>
+        </div>
+      </section>
+
+      <section class="doc-section" id="contact" data-img="assets/retention-system.png">
+        <div class="section-meta">04 // Finalization</div>
+        <h2>Gotowość do Implementacji</h2>
+        <p>Nasz zespół inżynierski jest gotowy do przeprowadzenia pełnego audytu Twojego zapotrzebowania na retencję.</p>
+        <a href="#" class="btn-action">
+          Uruchom procedurę kontaktu
+          <span>→</span>
+        </a>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const sections = document.querySelectorAll('.doc-section');
+    const viewportImg = document.getElementById('viewportImg');
+    const assetContainer = document.getElementById('assetContainer');
+
+    const observerOptions = {
+      threshold: 0.5
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const newImg = entry.target.getAttribute('data-img');
+          // Smooth transition effect
+          assetContainer.style.transform = 'scale(0.95) opacity: 0.5';
+          setTimeout(() => {
+            viewportImg.src = newImg;
+            assetContainer.style.transform = 'scale(1)';
+          }, 200);
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
+
+    // Mouse parallax for viewport
+    window.addEventListener('mousemove', (e) => {
+      const x = (window.innerWidth / 2 - e.pageX) / 40;
+      const y = (window.innerHeight / 2 - e.pageY) / 40;
+      if (window.innerWidth > 1024) {
+        assetContainer.style.transform = `translate(${x}px, ${y}px)`;
+      }
+      document.getElementById('coords').innerText = `${(e.pageX/100).toFixed(2)}, ${(e.pageY/100).toFixed(2)}`;
+    });
+  </script>
+</body>
+</html>
